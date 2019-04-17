@@ -23,18 +23,43 @@ redshift_SOURCES = \
 
 EXTRA_redshift_SOURCES = \
 	gamma-drm.c gamma-drm.h \
+	gamma-wl.c gamma-wl.h \
 	gamma-randr.c gamma-randr.h \
 	gamma-vidmode.c gamma-vidmode.h \
 	location-geoclue2.c location-geoclue2.h
 
 AM_CFLAGS =
 redshift_LDADD = @LIBINTL@
+EXTRA_DIST = gamma-control.xml orbital-authorizer.xml
 
 if ENABLE_DRM
 redshift_SOURCES += gamma-drm.c gamma-drm.h
 AM_CFLAGS += $(DRM_CFLAGS)
 redshift_LDADD += \
 	$(DRM_LIBS) $(DRM_CFLAGS)
+endif
+
+if ENABLE_WAYLAND
+redshift_SOURCES += gamma-wl.c gamma-wl.h os-compatibility.c os-compatibility.h
+
+AM_CFLAGS += $(WAYLAND_CFLAGS)
+
+redshift_LDADD += \
+	$(WAYLAND_LIBS) $(WAYLAND_CFLAGS)
+
+nodist_redshift_SOURCES = \
+	gamma-control-protocol.c \
+	gamma-control-client-protocol.h \
+	orbital-authorizer-protocol.c \
+	orbital-authorizer-client-protocol.h
+
+BUILT_SOURCES = \
+	gamma-control-protocol.c \
+	gamma-control-client-protocol.h \
+	orbital-authorizer-protocol.c \
+	orbital-authorizer-client-protocol.h
+
+EXTRA_DIST += gamma-control.xml orbital-authorizer.xml
 endif
 
 if ENABLE_RANDR
@@ -61,3 +86,11 @@ AM_CFLAGS += \
 redshift_LDADD += \
 	$(GEOCLUE2_LIBS) $(GEOCLUE2_CFLAGS)
 endif
+
+CLEANFILES = *-protocol.c *-client-protocol.h
+
+%-protocol.c : $(srcdir)/%.xml
+	$(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(WAYLAND_SCANNER) private-code < $< > $@
+
+%-client-protocol.h : $(srcdir)/%.xml
+	$(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(WAYLAND_SCANNER) client-header < $< > $@

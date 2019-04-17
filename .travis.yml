@@ -5,7 +5,7 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-      dist: trusty
+      dist: xenial
       sudo: false
 
 addons:
@@ -21,6 +21,8 @@ addons:
       # VidMode
       - libx11-dev
       - libxxf86vm-dev
+      # Wayland
+      - libwayland-dev
       # GeoClue2
       - libglib2.0-dev
       # GUI
@@ -30,7 +32,7 @@ install:
   - ./bootstrap
   - mkdir "$TRAVIS_BUILD_DIR/root"
   - |
-    ./configure --prefix="$TRAVIS_BUILD_DIR/root" --enable-drm --enable-vidmode --enable-randr --enable-geoclue2 --enable-gui --enable-apparmor
+    ./configure --prefix="$TRAVIS_BUILD_DIR/root" --enable-drm --enable-vidmode --enable-randr --enable-geoclue2 --enable-gui --enable-apparmor --with-systemduserunitdir=no
   - make -j2 install
   - make -j2 distcheck
 

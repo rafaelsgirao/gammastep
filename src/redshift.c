@@ -65,6 +65,11 @@
 # include "gamma-vidmode.h"
 #endif
 
+#ifdef ENABLE_WAYLAND
+# include "gamma-wl.h"
+#endif
+
+
 #include "location-manual.h"
 
 #ifdef ENABLE_GEOCLUE2
@@ -868,6 +873,9 @@ main(int argc, char *argv[])
 
 	/* List of gamma methods. */
 	const gamma_method_t gamma_methods[] = {
+#ifdef ENABLE_WAYLAND
+		wl_gamma_method,
+#endif
 #ifdef ENABLE_DRM
 		drm_gamma_method,
 #endif
@@ -1193,6 +1201,13 @@ main(int argc, char *argv[])
 				options.method->free(method_state);
 				exit(EXIT_FAILURE);
 			}
+
+			/* wlroots gamma adjustments automatically revert when
+			 * the process exits, so we wait until interrupt. */
+			if (strcmp(options.method->name, "wayland") == 0) {
+				fputs(_("Press ctrl-c to stop...\n"), stderr);
+				pause();
+			}
 		}
 	}
 	break;
@@ -1213,6 +1228,13 @@ main(int argc, char *argv[])
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
 		}
+
+		/* wlroots gamma adjustments automatically revert when
+		 * the process exits, so we wait until interrupt. */
+		if (strcmp(options.method->name, "wayland") == 0) {
+			fputs(_("Press ctrl-c to stop...\n"), stderr);
+			pause();
+		}
 	}
 	break;
 	case PROGRAM_MODE_RESET:
@@ -1226,6 +1248,13 @@ main(int argc, char *argv[])
 			fputs(_("Temperature adjustment failed.\n"), stderr);
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
+		}
+
+		/* wlroots gamma adjustments automatically revert when
+		 * the process exits, so we wait until interrupt. */
+		if (strcmp(options.method->name, "wayland") == 0) {
+			fputs(_("Press ctrl-c to stop...\n"), stderr);
+			pause();
 		}
 	}
 	break;

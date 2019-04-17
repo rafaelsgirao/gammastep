@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: redshift\n"
 "Report-Msgid-Bugs-To: https://github.com/jonls/redshift/issues\n"
-"POT-Creation-Date: 2020-05-04 01:53-0700\n"
+"POT-Creation-Date: 2020-05-04 03:15-0700\n"
 "PO-Revision-Date: 2018-04-05 13:24+0000\n"
 "Last-Translator: Zmicer Turok <Unknown>\n"
 "Language-Team: Belarusian <be@li.org>\n"
@@ -25,66 +25,66 @@ msgid "redshift"
 msgstr "Redshift"
 
 #. TRANSLATORS: Name printed when period of day is unknown
-#: src/redshift.c:101
+#: src/redshift.c:106
 msgid "None"
 msgstr "Няма"
 
-#: src/redshift.c:102 src/redshift.c:1065
+#: src/redshift.c:107 src/redshift.c:1073
 msgid "Daytime"
 msgstr "Дзённы час"
 
-#: src/redshift.c:103 src/redshift.c:1069
+#: src/redshift.c:108 src/redshift.c:1077
 msgid "Night"
 msgstr "Начны час"
 
-#: src/redshift.c:104
+#: src/redshift.c:109
 msgid "Transition"
 msgstr "Пераход"
 
-#: src/redshift.c:191
+#: src/redshift.c:196
 #, c-format
 msgid "Period: %s\n"
 msgstr "Перыяд : %s\n"
 
-#: src/redshift.c:194
+#: src/redshift.c:199
 #, c-format
 msgid "Period: %s (%.2f%% day)\n"
 msgstr "Перыяд: %s (%.2f%% дзень)\n"
 
 #. TRANSLATORS: Abbreviation for `north'
-#: src/redshift.c:206
+#: src/redshift.c:211
 msgid "N"
 msgstr "Пнч"
 
 #. TRANSLATORS: Abbreviation for `south'
-#: src/redshift.c:208
+#: src/redshift.c:213
 msgid "S"
 msgstr "Пдз"
 
 #. TRANSLATORS: Abbreviation for `east'
-#: src/redshift.c:210
+#: src/redshift.c:215
 msgid "E"
 msgstr "У"
 
 #. TRANSLATORS: Abbreviation for `west'
-#: src/redshift.c:212
+#: src/redshift.c:217
 msgid "W"
 msgstr "З"
 
 #. TRANSLATORS: Append degree symbols after %f if possible.
 #. The string following each number is an abreviation for
 #. north, source, east or west (N, S, E, W).
-#: src/redshift.c:217
+#: src/redshift.c:222
 #, c-format
 msgid "Location: %.2f %s, %.2f %s\n"
 msgstr "Мясцовасць: %.2f %s, %.2f %s\n"
 
-#: src/redshift.c:291 src/redshift.c:382
+#: src/redshift.c:296 src/redshift.c:387
 #, c-format
 msgid "Initialization of %s failed.\n"
 msgstr "Памылка падчас ініцыялізацыі %s .\n"
 
-#: src/redshift.c:306 src/redshift.c:350 src/redshift.c:397 src/redshift.c:429
+#: src/redshift.c:311 src/redshift.c:355 src/redshift.c:402 src/redshift.c:434
 #, c-format
 msgid "Failed to set %s option.\n"
 msgstr "Не атрымалася задаць параметр %s .\n"
@@ -92,96 +92,96 @@ msgstr "Не атрымалася задаць параметр %s .\n"
 #. TRANSLATORS: `help' must not be
 #. translated.
 #. TRANSLATORS: `help' must not be translated.
-#: src/redshift.c:311 src/redshift.c:353
+#: src/redshift.c:316 src/redshift.c:358
 #, c-format
 msgid "Try `-l %s:help' for more information.\n"
 msgstr "Паспрабуйце `-l %s:help' , каб атрымаць больш дакладную інфармацыю.\n"
 
-#: src/redshift.c:339 src/redshift.c:419
+#: src/redshift.c:344 src/redshift.c:424
 #, c-format
 msgid "Failed to parse option `%s'.\n"
 msgstr "Не атрымалася разабраць параметр `%s'.\n"
 
-#: src/redshift.c:366
+#: src/redshift.c:371
 #, c-format
 msgid "Failed to start provider %s.\n"
 msgstr "Не атрымалася запусціць пастаўшчыка %s.\n"
 
 #. TRANSLATORS: `help' must not be
 #. translated.
-#: src/redshift.c:402
+#: src/redshift.c:407
 #, c-format
 msgid "Try `-m %s:help' for more information.\n"
 msgstr "Паспрабуйце `-m %s:help' каб атрымаць больш дакладную інфармацыю.\n"
 
 #. TRANSLATORS: `help' must not be translated.
-#: src/redshift.c:432
+#: src/redshift.c:437
 #, c-format
 msgid "Try -m %s:help' for more information.\n"
 msgstr "Паспрабуйце `-m %s:help' , каб атрымаць больш дакладную інфармацыю.\n"
 
-#: src/redshift.c:444
+#: src/redshift.c:449
 #, c-format
 msgid "Failed to start adjustment method %s.\n"
 msgstr "Не атрымалася запусціць метад рэгулявання %s.\n"
 
-#: src/redshift.c:475
+#: src/redshift.c:480
 #, c-format
 msgid "Latitude must be between %.1f and %.1f.\n"
 msgstr "Шырата мусіць быць паміж %.1f і %.1f.\n"
 
-#: src/redshift.c:484
+#: src/redshift.c:489
 #, c-format
 msgid "Longitude must be between %.1f and %.1f.\n"
 msgstr "Даўгата мусіць быць паміж %.1f і %.1f.\n"
 
-#: src/redshift.c:511 src/redshift.c:530 src/redshift.c:662 src/redshift.c:1145
+#: src/redshift.c:516 src/redshift.c:535 src/redshift.c:667 src/redshift.c:1153
 msgid "Unable to read system time.\n"
 msgstr "Не атрымалася прачытаць сістэмны час\n"
 
-#: src/redshift.c:601
+#: src/redshift.c:606
 msgid "Waiting for initial location to become available...\n"
 msgstr "Чаканне даступнасці першапачатковага месцазнаходжання...\n"
 
-#: src/redshift.c:607 src/redshift.c:799 src/redshift.c:814 src/redshift.c:1130
+#: src/redshift.c:612 src/redshift.c:804 src/redshift.c:819 src/redshift.c:1138
 msgid "Unable to get location from provider.\n"
 msgstr "Не атрымалася вызначыць мясцовасць ў пастаўшчыка.\n"
 
-#: src/redshift.c:613 src/redshift.c:838
+#: src/redshift.c:618 src/redshift.c:843
 msgid "Invalid location returned from provider.\n"
 msgstr "Ад пастаўшчыка атрымана хібнае месцазнахожданне.\n"
 
-#: src/redshift.c:622 src/redshift.c:755 src/redshift.c:1180
-#: src/redshift.c:1202
+#: src/redshift.c:627 src/redshift.c:760 src/redshift.c:1188
+#: src/redshift.c:1217
 #, c-format
 msgid "Color temperature: %uK\n"
 msgstr "Каляровая тэмпература: %uK\n"
 
-#: src/redshift.c:623 src/redshift.c:760 src/redshift.c:1182
+#: src/redshift.c:628 src/redshift.c:765 src/redshift.c:1190
 #, c-format
 msgid "Brightness: %.2f\n"
 msgstr "Яркасць: %.2f\n"
 
-#: src/redshift.c:652
+#: src/redshift.c:657
 #, c-format
 msgid "Status: %s\n"
 msgstr "Стан: %s\n"
 
-#: src/redshift.c:653 src/redshift-gtk/statusicon.py:314
+#: src/redshift.c:658 src/redshift-gtk/statusicon.py:314
 msgid "Disabled"
 msgstr "Адключана"
 
-#: src/redshift.c:653 src/redshift-gtk/statusicon.py:78
+#: src/redshift.c:658 src/redshift-gtk/statusicon.py:78
 #: src/redshift-gtk/statusicon.py:314
 msgid "Enabled"
 msgstr "Уключана"
 
-#: src/redshift.c:769 src/redshift.c:1191 src/redshift.c:1212
-#: src/redshift.c:1226
+#: src/redshift.c:774 src/redshift.c:1199 src/redshift.c:1227
+#: src/redshift.c:1248
 msgid "Temperature adjustment failed.\n"
 msgstr "Не атрымалася наладзіць тэмпературу\n"
 
-#: src/redshift.c:821
+#: src/redshift.c:826
 msgid ""
 "Location is temporarily unavailable; Using previous location until it "
 "becomes available...\n"
@@ -189,33 +189,33 @@ msgstr ""
 "Месцазнаходжанне часова недаступна; Выкарыстоўваецца папярэдняе, пакуль "
 "гэтае не стане даступна...\n"
 
-#: src/redshift.c:925
+#: src/redshift.c:933
 msgid "Partitial time-configuration not supported!\n"
 msgstr "Частковая наладка часу не падтрымліваецца!\n"
 
-#: src/redshift.c:933
+#: src/redshift.c:941
 msgid "Invalid dawn/dusk time configuration!\n"
 msgstr "Хібная канфігурацыя часу світанку/змяркання!\n"
 
-#: src/redshift.c:964
+#: src/redshift.c:972
 #, c-format
 msgid "Trying location provider `%s'...\n"
 msgstr "Паспрабаваць пастаўшчыка мясцовасці `%s'...\n"
 
-#: src/redshift.c:969
+#: src/redshift.c:977
 msgid "Trying next provider...\n"
 msgstr "Паспрабаваць наступнага пастаўшчыка...\n"
 
-#: src/redshift.c:975
+#: src/redshift.c:983
 #, c-format
 msgid "Using provider `%s'.\n"
 msgstr "Выкарыстоўваць пастаўшчыка `%s'.\n"
 
-#: src/redshift.c:983
+#: src/redshift.c:991
 msgid "No more location providers to try.\n"
 msgstr "Больш няма пастаўшчыкоў.\n"
 
-#: src/redshift.c:992
+#: src/redshift.c:1000
 #, c-format
 msgid ""
 "High transition elevation cannot be lower than the low transition "
@@ -223,66 +223,70 @@ msgid ""
 msgstr "Высокі пераход не можа быць ніжэй, чым вышыня нізкага пераходу.\n"
 
 #. TRANSLATORS: Append degree symbols if possible.
-#: src/redshift.c:999
+#: src/redshift.c:1007
 #, c-format
 msgid "Solar elevations: day above %.1f, night below %.1f\n"
 msgstr "Вышыня сонца :  днём вышэй %.1f, ноччу ніжэй за %.1f\n"
 
-#: src/redshift.c:1007
+#: src/redshift.c:1015
 #, c-format
 msgid "Temperatures: %dK at day, %dK at night\n"
 msgstr "Тэмпература : %dK днём, %dK уначы\n"
 
-#: src/redshift.c:1018 src/redshift.c:1029
+#: src/redshift.c:1026 src/redshift.c:1037
 #, c-format
 msgid "Temperature must be between %uK and %uK.\n"
 msgstr "Тэмпература павінна быць паміж %uK і %uK.\n"
 
-#: src/redshift.c:1041
+#: src/redshift.c:1049
 #, c-format
 msgid "Brightness values must be between %.1f and %.1f.\n"
 msgstr "Яркасць мусіць быць паміж %.1f і %.1f.\n"
 
-#: src/redshift.c:1047
+#: src/redshift.c:1055
 #, c-format
 msgid "Brightness: %.2f:%.2f\n"
 msgstr "Яркасць: %.2f:%.2f\n"
 
-#: src/redshift.c:1056
+#: src/redshift.c:1064
 #, c-format
 msgid "Gamma value must be between %.1f and %.1f.\n"
 msgstr "Значэнне гамы мусіць быць паміж %.1f і %.1f.\n"
 
 #. TRANSLATORS: The string in parenthesis is either
 #. Daytime or Night (translated).
-#: src/redshift.c:1064 src/redshift.c:1068
+#: src/redshift.c:1072 src/redshift.c:1076
 #, c-format
 msgid "Gamma (%s): %.3f, %.3f, %.3f\n"
 msgstr "Гама (%s): %.3f, %.3f, %.3f\n"
 
-#: src/redshift.c:1097
+#: src/redshift.c:1105
 msgid "Trying next method...\n"
 msgstr "Паспрабаваць наступны рэжым...\n"
 
-#: src/redshift.c:1102
+#: src/redshift.c:1110
 #, c-format
 msgid "Using method `%s'.\n"
 msgstr "Выкарыстоўваемы рэжым `%s'.\n"
 
-#: src/redshift.c:1109
+#: src/redshift.c:1117
 msgid "No more methods to try.\n"
 msgstr "Больш няма рэжымаў.\n"
 
-#: src/redshift.c:1123
+#: src/redshift.c:1131
 msgid "Waiting for current location to become available...\n"
 msgstr "Чаканне даступнасці бягучага месцазнаходжання...\n"
 
 #. TRANSLATORS: Append degree symbol if
 #. possible.
-#: src/redshift.c:1164
+#: src/redshift.c:1172
 #, c-format
 msgid "Solar elevation: %f\n"
 msgstr "Вышыня сонца : %f\n"
+
+#: src/redshift.c:1208 src/redshift.c:1235 src/redshift.c:1256
+msgid "Press ctrl-c to stop...\n"
+msgstr "Націсніце ctrl-c, каб спыніцца...\n"
 
 #. TRANSLATORS: help output 1
 #. LAT is latitude, LON is longitude,
@@ -538,6 +542,42 @@ msgstr "CRTC мусіць быць станоўчым цэлым лікам\n"
 #, c-format
 msgid "Unknown method parameter: `%s'.\n"
 msgstr "Невядомы параметр метаду `%s'.\n"
+
+#: src/gamma-wl.c:84
+#, c-format
+msgid ""
+"Fatal: redshift was not authorized to bind the "
+"'zwlr_gamma_control_manager_v1' interface.\n"
+msgstr ""
+
+#: src/gamma-wl.c:104
+#, fuzzy, c-format
+msgid "Failed to allcate memory\n"
+msgstr "Не атрымалася запусціць метад рэгулявання %s.\n"
+
+#: src/gamma-wl.c:138
+#, c-format
+msgid "The zwlr_gamma_control_manager_v1 was removed\n"
+msgstr ""
+
+#: src/gamma-wl.c:191
+msgid "Could not connect to wayland display, exiting.\n"
+msgstr ""
+
+#: src/gamma-wl.c:232
+#, c-format
+msgid "Ignoring error on wayland connection while waiting to disconnect: %d\n"
+msgstr ""
+
+#: src/gamma-wl.c:261
+#, fuzzy
+msgid "Adjust gamma ramps with a Wayland compositor.\n"
+msgstr "Наладзіць гаму з Windows GDI.\n"
+
+#: src/gamma-wl.c:296
+#, c-format
+msgid "The Wayland connection experienced a fatal error: %d\n"
+msgstr ""
 
 #: src/gamma-randr.c:98 src/gamma-randr.c:157 src/gamma-randr.c:196
 #: src/gamma-randr.c:222 src/gamma-randr.c:279 src/gamma-randr.c:439
@@ -813,9 +853,6 @@ msgstr "Для вываду дапаможніка, калі ласка, увя�
 #~ msgid "Color temperature adjustment tool"
 #~ msgstr "Інструмент рэгулявання каляровай тэмпературы"
 
-#~ msgid "Press ctrl-c to stop...\n"
-#~ msgstr "Націсніце ctrl-c, каб спыніцца...\n"
-
 #~ msgid "Unable to save current gamma ramp.\n"
 #~ msgstr "Немагчыма захаваць дзейную гаму.\n"
 
@@ -827,9 +864,6 @@ msgstr "Для вываду дапаможніка, калі ласка, увя�
 
 #~ msgid "Display device does not support gamma ramps.\n"
 #~ msgstr "Экран прылады не падтрымлівае гаму.\n"
-
-#~ msgid "Adjust gamma ramps with the Windows GDI.\n"
-#~ msgstr "Наладзіць гаму з Windows GDI.\n"
 
 #~ msgid "Unable to restore gamma ramps.\n"
 #~ msgstr "Немагчыма аднавіць гаму.\n"
