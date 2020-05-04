@@ -22,8 +22,6 @@
 #include <fcntl.h>
 
 
-#ifndef _WIN32
-
 /* Create non-blocking set of pipe fds. */
 int
 pipeutils_create_nonblocking(int pipefds[2])
@@ -68,19 +66,6 @@ pipeutils_create_nonblocking(int pipefds[2])
 
 	return 0;
 }
-
-#else /* _WIN32 */
-
-/* Create non-blocking set of pipe fds.
-
-   Not supported on Windows! Always fails. */
-int
-pipeutils_create_nonblocking(int pipefds[2])
-{
-	return -1;
-}
-
-#endif
 
 /* Signal on write-end of pipe. */
 void

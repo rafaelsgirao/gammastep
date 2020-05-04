@@ -25,16 +25,10 @@ EXTRA_redshift_SOURCES = \
 	gamma-drm.c gamma-drm.h \
 	gamma-randr.c gamma-randr.h \
 	gamma-vidmode.c gamma-vidmode.h \
-	gamma-quartz.c gamma-quartz.h \
-	gamma-w32gdi.c gamma-w32gdi.h \
-	location-geoclue2.c location-geoclue2.h \
-	location-corelocation.m location-corelocation.h \
-	windows/appicon.rc \
-	windows/versioninfo.rc
+	location-geoclue2.c location-geoclue2.h
 
 AM_CFLAGS =
 redshift_LDADD = @LIBINTL@
-EXTRA_DIST = windows/redshift.ico
 
 if ENABLE_DRM
 redshift_SOURCES += gamma-drm.c gamma-drm.h
@@ -59,18 +53,6 @@ redshift_LDADD += \
 	$(XF86VM_LIBS) $(XF86VM_CFLAGS)
 endif
 
-if ENABLE_QUARTZ
-redshift_SOURCES += gamma-quartz.c gamma-quartz.h
-AM_CFLAGS += $(QUARTZ_CFLAGS)
-redshift_LDADD += \
-	$(QUARTZ_LIBS) $(QUARTZ_CFLAGS)
-endif
-
-if ENABLE_WINGDI
-redshift_SOURCES += gamma-w32gdi.c gamma-w32gdi.h
-redshift_LDADD += -lgdi32
-endif
-
 
 if ENABLE_GEOCLUE2
 redshift_SOURCES += location-geoclue2.c location-geoclue2.h
@@ -79,27 +61,3 @@ AM_CFLAGS += \
 redshift_LDADD += \
 	$(GEOCLUE2_LIBS) $(GEOCLUE2_CFLAGS)
 endif
-
-# Build CoreLocation module as a separate convenience
-# library since it is using a separate compiler
-# (Objective C).
-
-if ENABLE_CORELOCATION
-noinst_LTLIBRARIES = liblocation-corelocation.la
-liblocation_corelocation_la_SOURCES = \
-	location-corelocation.m location-corelocation.h
-liblocation_corelocation_la_OBJCFLAGS = \
-	$(CORELOCATION_CFLAGS)
-liblocation_corelocation_la_LIBADD = \
-	$(CORELOCATION_CFLAGS) $(CORELOCATION_LIBS)
-redshift_LDADD += liblocation-corelocation.la
-endif
-
-
-# Windows resources
-if ENABLE_WINDOWS_RESOURCE
-redshift_SOURCES += windows/appicon.rc windows/versioninfo.rc
-endif
-
-.rc.o:
-	$(AM_V_GEN)$(WINDRES) -I$(top_builddir) -i $< -o $@

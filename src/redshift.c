@@ -29,24 +29,9 @@
 #include <locale.h>
 #include <errno.h>
 
-/* poll.h is not available on Windows but there is no Windows location provider
-   using polling. On Windows, we just define some stubs to make things compile.
-   */
-#ifndef _WIN32
-# include <poll.h>
-#else
-#define POLLIN 0
-struct pollfd {
-	int fd;
-	short events;
-	short revents;
-};
-int poll(struct pollfd *fds, int nfds, int timeout) { abort(); return -1; }
-#endif
+#include <poll.h>
 
-#if defined(HAVE_SIGNAL_H) && !defined(__WIN32__)
-# include <signal.h>
-#endif
+#include <signal.h>
 
 #ifdef ENABLE_NLS
 # include <libintl.h>
@@ -66,12 +51,6 @@ int poll(struct pollfd *fds, int nfds, int timeout) { abort(); return -1; }
 #include "signals.h"
 #include "options.h"
 
-/* pause() is not defined on windows platform but is not needed either.
-   Use a noop macro instead. */
-#ifdef __WIN32__
-# define pause()
-#endif
-
 #include "gamma-dummy.h"
 
 #ifdef ENABLE_DRM
@@ -86,23 +65,10 @@ int poll(struct pollfd *fds, int nfds, int timeout) { abort(); return -1; }
 # include "gamma-vidmode.h"
 #endif
 
-#ifdef ENABLE_QUARTZ
-# include "gamma-quartz.h"
-#endif
-
-#ifdef ENABLE_WINGDI
-# include "gamma-w32gdi.h"
-#endif
-
-
 #include "location-manual.h"
 
 #ifdef ENABLE_GEOCLUE2
 # include "location-geoclue2.h"
-#endif
-
-#ifdef ENABLE_CORELOCATION
-# include "location-corelocation.h"
 #endif
 
 #undef CLAMP
@@ -911,12 +877,6 @@ main(int argc, char *argv[])
 #ifdef ENABLE_VIDMODE
 		vidmode_gamma_method,
 #endif
-#ifdef ENABLE_QUARTZ
-		quartz_gamma_method,
-#endif
-#ifdef ENABLE_WINGDI
-		w32gdi_gamma_method,
-#endif
 		dummy_gamma_method,
 		{ NULL }
 	};
@@ -925,9 +885,6 @@ main(int argc, char *argv[])
 	const location_provider_t location_providers[] = {
 #ifdef ENABLE_GEOCLUE2
 		geoclue2_location_provider,
-#endif
-#ifdef ENABLE_CORELOCATION
-		corelocation_location_provider,
 #endif
 		manual_location_provider,
 		{ NULL }
@@ -1236,15 +1193,6 @@ main(int argc, char *argv[])
 				options.method->free(method_state);
 				exit(EXIT_FAILURE);
 			}
-
-			/* In Quartz (macOS) the gamma adjustments will
-			   automatically revert when the process exits.
-			   Therefore, we have to loop until CTRL-C is received.
-			   */
-			if (strcmp(options.method->name, "quartz") == 0) {
-				fputs(_("Press ctrl-c to stop...\n"), stderr);
-				pause();
-			}
 		}
 	}
 	break;
@@ -1265,14 +1213,6 @@ main(int argc, char *argv[])
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
 		}
-
-		/* In Quartz (OSX) the gamma adjustments will automatically
-		   revert when the process exits. Therefore, we have to loop
-		   until CTRL-C is received. */
-		if (strcmp(options.method->name, "quartz") == 0) {
-			fputs(_("Press ctrl-c to stop...\n"), stderr);
-			pause();
-		}
 	}
 	break;
 	case PROGRAM_MODE_RESET:
@@ -1286,14 +1226,6 @@ main(int argc, char *argv[])
 			fputs(_("Temperature adjustment failed.\n"), stderr);
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
-		}
-
-		/* In Quartz (OSX) the gamma adjustments will automatically
-		   revert when the process exits. Therefore, we have to loop
-		   until CTRL-C is received. */
-		if (strcmp(options.method->name, "quartz") == 0) {
-			fputs(_("Press ctrl-c to stop...\n"), stderr);
-			pause();
 		}
 	}
 	break;

@@ -23,14 +23,10 @@
 #endif
 
 #include <stdio.h>
-#if defined(HAVE_SIGNAL_H) && !defined(__WIN32__)
-# include <signal.h>
-#endif
+#include <signal.h>
 
 #include "signals.h"
 
-
-#if defined(HAVE_SIGNAL_H) && !defined(__WIN32__)
 
 volatile sig_atomic_t exiting = 0;
 volatile sig_atomic_t disable = 0;
@@ -50,18 +46,9 @@ sigdisable(int signo)
 	disable = 1;
 }
 
-#else /* ! HAVE_SIGNAL_H || __WIN32__ */
-
-int disable = 0;
-int exiting = 0;
-
-#endif /* ! HAVE_SIGNAL_H || __WIN32__ */
-
-
 int
 signals_install_handlers(void)
 {
-#if defined(HAVE_SIGNAL_H) && !defined(__WIN32__)
 	struct sigaction sigact;
 	sigset_t sigset;
 	int r;
@@ -106,7 +93,6 @@ signals_install_handlers(void)
 		perror("sigaction");
 		return -1;
 	}
-#endif /* HAVE_SIGNAL_H && ! __WIN32__ */
 
 	return 0;
 }

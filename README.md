@@ -36,12 +36,10 @@ configurations and manually defining the location in case of issues with the
 automatic location provider. An example configuration can be found in
 [redshift.conf.sample](redshift.conf.sample).
 
-The configuration file should be saved in the following location depending on
-the platform:
+The configuration file should be saved in the following location:
 
-- Linux/macOS: `~/.config/redshift/redshift.conf` (if the environment variable `XDG_CONFIG_HOME` is undefined) or `${XDG_CONFIG_HOME}/redshift/redshift.conf` (if `XDG_CONFIG_HOME` is defined).
-- Windows: Put `redshift.conf` in `%USERPROFILE%\AppData\Local\`
-    (aka `%localappdata%`).
+- `~/.config/redshift/redshift.conf` (if the environment variable `XDG_CONFIG_HOME` is undefined)
+- `${XDG_CONFIG_HOME}/redshift/redshift.conf` (if `XDG_CONFIG_HOME` is defined).
 
 **Where can I find my coordinates to put in the configuration file?**
 
@@ -123,8 +121,6 @@ Latest builds from master branch
 --------------------------------
 
 - [Ubuntu PPA](https://launchpad.net/~dobey/+archive/ubuntu/redshift-daily/+packages) (`sudo add-apt-repository ppa:dobey/redshift-daily`)
-- [Windows x86_64](https://ci.appveyor.com/api/projects/jonls/redshift/artifacts/redshift-windows-x86_64.zip?branch=master&job=Environment%3A+arch%3Dx86_64&pr=false)
-- [Windows x86](https://ci.appveyor.com/api/projects/jonls/redshift/artifacts/redshift-windows-i686.zip?branch=master&job=Environment%3A+arch%3Di686&pr=false)
 
 Contributing / Building from source
 -----------------------------------

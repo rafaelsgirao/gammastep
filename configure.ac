@@ -13,43 +13,12 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 # Checks for programs.
 AC_PROG_CC_C99
 AC_PROG_LIBTOOL
-AC_PROG_OBJC # For macOS support modules
 AC_LANG([C])
 
 AC_PROG_INTLTOOL([0.50])
 
 AC_CANONICAL_HOST
 
-# Test host platform
-build_windows=no
-case "${host_os}" in
-	mingw*)
-		build_windows=yes
-		;;
-esac
-
-# Test whether to compile Windows resources
-AC_CHECK_TOOL([WINDRES], [windres], [])
-AS_IF([test "x$build_windows" = "xyes" -a -n "x$WINDRES"], [
-	enable_windows_resource=yes
-], [
-	enable_windows_resource=no
-])
-AM_CONDITIONAL([ENABLE_WINDOWS_RESOURCE],
-	[test "x$enable_windows_resource" = xyes])
-
-
-# Test whether Objective C compiler works
-AC_MSG_CHECKING([whether Objective C compiler works])
-AC_LANG_PUSH([Objective C])
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([])], [
-	AC_MSG_RESULT([yes])
-	have_objc_compiler=yes
-], [
-	AC_MSG_RESULT([no])
-	have_objc_compiler=no
-])
-AC_LANG_POP([Objective C])
 
 # Checks for libraries.
 AM_GNU_GETTEXT_VERSION([0.17])
@@ -70,32 +39,6 @@ PKG_CHECK_MODULES([XCB_RANDR], [xcb-randr],
 
 PKG_CHECK_MODULES([GLIB], [glib-2.0 gobject-2.0], [have_glib=yes], [have_glib=no])
 PKG_CHECK_MODULES([GEOCLUE2], [glib-2.0 gio-2.0 >= 2.26], [have_geoclue2=yes], [have_geoclue2=no])
-
-# macOS headers
-AC_CHECK_HEADER([ApplicationServices/ApplicationServices.h], [have_appserv_h=yes], [have_appserv_h=no])
-
-# CoreLocation.h is an Objective C header. Only test if
-# Objective C compiler works. AC_CHECK_HEADER does not
-# appear to work if the Ojective C compiler is not
-# available so we need a custom test.
-AC_MSG_CHECKING([whether CoreLocation/CoreLocation.h is usable])
-AS_IF([test "x$have_objc_compiler" = xyes], [
-	AC_LANG_PUSH([Objective C])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#import <CoreLocation/CoreLocation.h>]],[[]])], [
-		AC_MSG_RESULT([yes])
-		have_corelocation_h=yes
-	], [
-		AC_MSG_RESULT([no])
-		have_corelocation_h=no
-	])
-	AC_LANG_POP([Objective C])
-], [
-	AC_MSG_RESULT([no Objective C compiler available])
-	have_corelocation_h=no
-])
-
-# Windows header
-AC_CHECK_HEADER([windows.h], [have_windows_h=yes], [have_windows_h=no])
 
 # Check for Python
 AM_PATH_PYTHON([3.2], [have_python=yes], [have_python=no])
@@ -172,58 +115,6 @@ AS_IF([test "x$enable_vidmode" != xno], [
 ])
 AM_CONDITIONAL([ENABLE_VIDMODE], [test "x$enable_vidmode" = xyes])
 
-# Check Quartz (macOS) method
-AC_MSG_CHECKING([whether to enable Quartz method])
-AC_ARG_ENABLE([quartz], [AC_HELP_STRING([--enable-quartz],
-	[enable Quartz (macOS) method])],
-	[enable_quartz=$enableval],[enable_quartz=maybe])
-AS_IF([test "x$enable_quartz" != xno], [
-	AS_IF([test $have_appserv_h = yes], [
-		QUARTZ_CFLAGS=""
-		QUARTZ_LIBS="-framework ApplicationServices"
-		AC_DEFINE([ENABLE_QUARTZ], 1,
-			[Define to 1 to enable Quartz method])
-		AC_MSG_RESULT([yes])
-		enable_quartz=yes
-	], [
-		AC_MSG_RESULT([missing dependencies])
-		AS_IF([test "x$enable_quartz" = xyes], [
-			AC_MSG_ERROR([missing Quartz headers])
-		])
-		enable_quartz=no
-	])
-], [
-	AC_MSG_RESULT([no])
-	enable_quartz=no
-])
-AM_CONDITIONAL([ENABLE_QUARTZ], [test "x$enable_quartz" = xyes])
-AC_SUBST([QUARTZ_CFLAGS])
-AC_SUBST([QUARTZ_LIBS])
-
-# Check Windows GDI method
-AC_MSG_CHECKING([whether to enable WinGDI method])
-AC_ARG_ENABLE([wingdi], [AC_HELP_STRING([--enable-wingdi],
-	[enable WinGDI method])],
-	[enable_wingdi=$enableval],[enable_wingdi=maybe])
-AS_IF([test "x$enable_wingdi" != xno], [
-	AS_IF([test $have_windows_h = yes], [
-		AC_DEFINE([ENABLE_WINGDI], 1,
-			[Define to 1 to enable WinGDI method])
-		AC_MSG_RESULT([yes])
-		enable_wingdi=yes
-	], [
-		AC_MSG_RESULT([missing dependencies])
-		AS_IF([test "x$enable_wingdi" = xyes], [
-			AC_MSG_ERROR([missing Windows API headers for WinGDI method])
-		])
-		enable_wingdi=no
-	])
-], [
-	AC_MSG_RESULT([no])
-	enable_wingdi=no
-])
-AM_CONDITIONAL([ENABLE_WINGDI], [test "x$enable_wingdi" = xyes])
-
 
 # Check Geoclue2 location provider
 AC_MSG_CHECKING([whether to enable Geoclue2 location provider])
@@ -248,34 +139,6 @@ AS_IF([test "x$enable_geoclue2" != xno], [
 	enable_geoclue2=no
 ])
 AM_CONDITIONAL([ENABLE_GEOCLUE2], [test "x$enable_geoclue2" = xyes])
-
-# Check CoreLocation (macOS) provider
-AC_MSG_CHECKING([whether to enable CoreLocation method])
-AC_ARG_ENABLE([corelocation], [AC_HELP_STRING([--enable-corelocation],
-	[enable CoreLocation (macOS) provider])],
-	[enable_corelocation=$enableval],[enable_corelocation=maybe])
-AS_IF([test "x$enable_corelocation" != xno], [
-	AS_IF([test "x$have_corelocation_h" = xyes], [
-		CORELOCATION_CFLAGS=""
-		CORELOCATION_LIBS="-framework Foundation -framework Cocoa -framework CoreLocation"
-		AC_DEFINE([ENABLE_CORELOCATION], 1,
-			[Define to 1 to enable CoreLocation provider])
-		AC_MSG_RESULT([yes])
-		enable_corelocation=yes
-	], [
-		AC_MSG_RESULT([missing dependencies])
-		AS_IF([test "x$enable_corelocation" = xyes], [
-			AC_MSG_ERROR([missing CoreLocation headers])
-		])
-		enable_corelocation=no
-	])
-], [
-	AC_MSG_RESULT([no])
-	enable_corelocation=no
-])
-AM_CONDITIONAL([ENABLE_CORELOCATION], [test "x$enable_corelocation" = xyes])
-AC_SUBST([CORELOCATION_CFLAGS])
-AC_SUBST([CORELOCATION_LIBS])
 
 
 # Check for GUI status icon
@@ -378,12 +241,9 @@ echo "
     DRM:		${enable_drm}
     RANDR:		${enable_randr}
     VidMode:		${enable_vidmode}
-    Quartz (macOS):	${enable_quartz}
-    WinGDI (Windows):	${enable_wingdi}
 
     Location providers:
     Geoclue2:			${enable_geoclue2}
-    CoreLocation (macOS):	${enable_corelocation}
 
     GUI:		${enable_gui}
     Ubuntu icons:	${enable_ubuntu}

@@ -28,9 +28,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#ifndef _WIN32
-# include <pwd.h>
-#endif
+#include <pwd.h>
 
 #include "config-ini.h"
 
@@ -77,14 +75,6 @@ open_config_file(const char *filepath)
 			}
 		}
 
-#ifdef _WIN32
-		if (f == NULL && (env = getenv("localappdata")) != NULL &&
-		    env[0] != '\0') {
-			snprintf(cp, sizeof(cp),
-				 "%s\\redshift.conf", env);
-			f = fopen(cp, "r");
-		}
-#endif
 		if (f == NULL && (env = getenv("HOME")) != NULL &&
 		    env[0] != '\0') {
 			snprintf(cp, sizeof(cp),
@@ -97,7 +87,6 @@ open_config_file(const char *filepath)
 				f = fopen(cp, "r");
 			}
 		}
-#ifndef _WIN32
 
 		if (f == NULL) {
 			struct passwd *pwd = getpwuid(getuid());
@@ -144,7 +133,6 @@ open_config_file(const char *filepath)
 				 "%s/redshift.conf", "/etc");
 			f = fopen(cp, "r");
 		}
-#endif
 
 		return f;
 	} else {

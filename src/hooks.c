@@ -22,9 +22,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <errno.h>
-#ifndef _WIN32
-# include <pwd.h>
-#endif
+#include <pwd.h>
 
 #include "hooks.h"
 #include "redshift.h"
@@ -61,13 +59,9 @@ open_hooks_dir(char *hp)
 		return opendir(hp);
 	}
 
-#ifndef _WIN32
 	struct passwd *pwd = getpwuid(getuid());
 	snprintf(hp, MAX_HOOK_PATH, "%s/.config/redshift/hooks", pwd->pw_dir);
 	return opendir(hp);
-#else
-	return NULL;
-#endif
 }
 
 /* Run hooks with a signal that the period changed. */
@@ -88,7 +82,6 @@ hooks_signal_period_change(period_t prev_period, period_t period)
 		snprintf(hook_path, sizeof(hook_path), "%s/%s",
 			 hooksdir_path, hook_name);
 
-#ifndef _WIN32
 		/* Fork and exec the hook. We close stdout
 		   so the hook cannot interfere with the normal
 		   output. */
@@ -108,6 +101,5 @@ hooks_signal_period_change(period_t prev_period, period_t period)
 			/* Only reached on error */
 			_exit(EXIT_FAILURE);
 		}
-#endif
 	}
 }
