@@ -21,6 +21,8 @@ profile dk.jonls.redshift @bindir@/redshift {
   audit dbus bus=system,
 
   owner @{HOME}/.config/{,redshift/}redshift.conf r,
+  owner @{HOME}/.config/redshift/hooks/ r,
+  owner @{HOME}/.config/redshift/hooks/* Ux,
   owner /{,var/}run/user/[0-9]*/redshift-shared-* rw,
 
   # Site-specific additions and overrides. See local/README for details.
