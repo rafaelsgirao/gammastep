@@ -76,6 +76,7 @@ uninstall-hook:
 %.desktop: %.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po)
 	$(AM_V_GEN)$(MKDIR_P) $(@D);
 	$(INTLTOOL_V_MERGE)LC_ALL=C $(INTLTOOL_MERGE) $(INTLTOOL_V_MERGE_OPTIONS) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@
+	rm -f -- $(top_builddir)/po/.intltool-merge-cache.lock
 endif
 
 
@@ -103,6 +104,7 @@ appdata_DATA = $(APPDATA_IN_FILES:.xml.in=.xml)
 %.xml: %.xml.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po)
 	$(AM_V_GEN)$(MKDIR_P) $(@D);
 	$(INTLTOOL_V_MERGE)LC_ALL=C $(INTLTOOL_MERGE) $(INTLTOOL_V_MERGE_OPTIONS) -x -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@
+	rm -f -- $(top_builddir)/po/.intltool-merge-cache.lock
 endif
 
 
