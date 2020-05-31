@@ -1,0 +1,10 @@
+[Unit]
+Description=Display colour temperature adjustment
+After=graphical-session.target
+
+[Service]
+ExecStart=@bindir@/gammastep
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

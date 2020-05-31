@@ -24,6 +24,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Software versions (please complete the following information):**
  - OS: [e.g. Linux/Windows/macOS]
- - Redshift version: [e.g. 1.11, run `redshift -V` in a terminal]
+ - Version: [e.g. 1.11, run `redshift -V` in a terminal]
  - Distribution: [e.g. Ubuntu]
- - Redshift installed from: [e.g. "using apt-get", "built from source"]
+ - Installed via: [e.g. "using apt-get", "built from source"]

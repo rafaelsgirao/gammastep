@@ -1,14 +1,13 @@
 
-SUBDIRS = redshift-gtk
+SUBDIRS = gammastep_indicator
 
 # I18n
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
-# redshift Program
-bin_PROGRAMS = redshift
+bin_PROGRAMS = gammastep
 
-redshift_SOURCES = \
+gammastep_SOURCES = \
 	colorramp.c colorramp.h \
 	config-ini.c config-ini.h \
 	gamma-dummy.c gamma-dummy.h \
@@ -21,7 +20,7 @@ redshift_SOURCES = \
 	solar.c solar.h \
 	systemtime.c systemtime.h
 
-EXTRA_redshift_SOURCES = \
+EXTRA_gammastep_SOURCES = \
 	gamma-drm.c gamma-drm.h \
 	gamma-wl.c gamma-wl.h \
 	gamma-randr.c gamma-randr.h \
@@ -29,25 +28,25 @@ EXTRA_redshift_SOURCES = \
 	location-geoclue2.c location-geoclue2.h
 
 AM_CFLAGS =
-redshift_LDADD = @LIBINTL@
+gammastep_LDADD = @LIBINTL@
 EXTRA_DIST = gamma-control.xml orbital-authorizer.xml
 
 if ENABLE_DRM
-redshift_SOURCES += gamma-drm.c gamma-drm.h
+gammastep_SOURCES += gamma-drm.c gamma-drm.h
 AM_CFLAGS += $(DRM_CFLAGS)
-redshift_LDADD += \
+gammastep_LDADD += \
 	$(DRM_LIBS) $(DRM_CFLAGS)
 endif
 
 if ENABLE_WAYLAND
-redshift_SOURCES += gamma-wl.c gamma-wl.h os-compatibility.c os-compatibility.h
+gammastep_SOURCES += gamma-wl.c gamma-wl.h os-compatibility.c os-compatibility.h
 
 AM_CFLAGS += $(WAYLAND_CFLAGS)
 
-redshift_LDADD += \
+gammastep_LDADD += \
 	$(WAYLAND_LIBS) $(WAYLAND_CFLAGS)
 
-nodist_redshift_SOURCES = \
+nodist_gammastep_SOURCES = \
 	gamma-control-protocol.c \
 	gamma-control-client-protocol.h \
 	orbital-authorizer-protocol.c \
@@ -63,27 +62,27 @@ EXTRA_DIST += gamma-control.xml orbital-authorizer.xml
 endif
 
 if ENABLE_RANDR
-redshift_SOURCES += gamma-randr.c gamma-randr.h
+gammastep_SOURCES += gamma-randr.c gamma-randr.h
 AM_CFLAGS += $(XCB_CFLAGS) $(XCB_RANDR_CFLAGS)
-redshift_LDADD += \
+gammastep_LDADD += \
 	$(XCB_LIBS) $(XCB_CFLAGS) \
 	$(XCB_RANDR_LIBS) $(XCB_RANDR_CFLAGS)
 endif
 
 if ENABLE_VIDMODE
-redshift_SOURCES += gamma-vidmode.c gamma-vidmode.h
+gammastep_SOURCES += gamma-vidmode.c gamma-vidmode.h
 AM_CFLAGS += $(X11_CFLAGS) $(XF86VM_CFLAGS)
-redshift_LDADD += \
+gammastep_LDADD += \
 	$(X11_LIBS) $(X11_CFLAGS) \
 	$(XF86VM_LIBS) $(XF86VM_CFLAGS)
 endif
 
 
 if ENABLE_GEOCLUE2
-redshift_SOURCES += location-geoclue2.c location-geoclue2.h
+gammastep_SOURCES += location-geoclue2.c location-geoclue2.h
 AM_CFLAGS += \
 	$(GEOCLUE2_CFLAGS)
-redshift_LDADD += \
+gammastep_LDADD += \
 	$(GEOCLUE2_LIBS) $(GEOCLUE2_CFLAGS)
 endif
 

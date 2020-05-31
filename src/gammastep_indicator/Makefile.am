@@ -1,19 +1,19 @@
 
 if ENABLE_GUI
-redshift_gtk_PYTHON = \
+gammastep_indicator_PYTHON = \
 	__init__.py \
 	controller.py \
 	statusicon.py \
 	utils.py
-nodist_redshift_gtk_PYTHON = \
+nodist_gammastep_indicator_PYTHON = \
 	defs.py
-redshift_gtkdir = $(pythondir)/redshift_gtk
+gammastep_indicatordir = $(pythondir)/gammastep_indicator
 
-bin_SCRIPTS = redshift-gtk
+bin_SCRIPTS = gammastep-indicator
 endif
 
-EXTRA_DIST = defs.py.in redshift-gtk.in
-CLEANFILES = defs.py redshift-gtk
+EXTRA_DIST = defs.py.in gammastep-indicator.in
+CLEANFILES = defs.py gammastep-indicator
 
 
 # Local python definitions
@@ -21,5 +21,5 @@ defs.py: defs.py.in
 	$(AM_V_GEN)sed -e "s|\@bindir\@|$(bindir)|g" \
 		-e "s|\@localedir\@|$(localedir)|g" $< > $@
 
-redshift-gtk: redshift-gtk.in
+gammastep-indicator: gammastep-indicator.in
 	$(AM_V_GEN)sed -e "s|\@pythondir\@|$(pythondir)|g" $< > $@

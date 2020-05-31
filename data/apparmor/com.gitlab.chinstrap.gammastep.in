@@ -3,7 +3,7 @@
 
 #include <tunables/global>
 
-profile dk.jonls.redshift @bindir@/redshift {
+profile com.gitlab.chinstap.gammastep @bindir@/gammastep {
   #include <abstractions/base>
   #include <abstractions/nameservice>
   #include <abstractions/dbus-strict>
@@ -20,11 +20,11 @@ profile dk.jonls.redshift @bindir@/redshift {
   # Allow but log any other dbus activity
   audit dbus bus=system,
 
-  owner @{HOME}/.config/{,redshift/}redshift.conf r,
-  owner @{HOME}/.config/redshift/hooks/ r,
-  owner @{HOME}/.config/redshift/hooks/* Ux,
-  owner /{,var/}run/user/[0-9]*/redshift-shared-* rw,
+  owner @{HOME}/.config/gammastep/config.ini r,
+  owner @{HOME}/.config/gammastep/hooks/ r,
+  owner @{HOME}/.config/gammastep/hooks/* Ux,
+  owner /{,var/}run/user/[0-9]*/gammastep-shared-* rw,
 
   # Site-specific additions and overrides. See local/README for details.
-  #include if exists <local/usr.bin.redshift>
+  #include if exists <local/com.gitlab.chinstrap.gammastep>
 }

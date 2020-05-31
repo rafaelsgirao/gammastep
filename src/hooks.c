@@ -13,6 +13,7 @@
 #include "redshift.h"
 
 #define MAX_HOOK_PATH  4096
+#define CONFIG_DIR "gammastep"
 
 
 /* Names of periods supplied to scripts. */
@@ -34,18 +35,18 @@ open_hooks_dir(char *hp)
 
 	if ((env = getenv("XDG_CONFIG_HOME")) != NULL &&
 	    env[0] != '\0') {
-		snprintf(hp, MAX_HOOK_PATH, "%s/redshift/hooks", env);
+		snprintf(hp, MAX_HOOK_PATH, "%s/" CONFIG_DIR "/hooks", env);
 		return opendir(hp);
 	}
 
 	if ((env = getenv("HOME")) != NULL &&
 	    env[0] != '\0') {
-		snprintf(hp, MAX_HOOK_PATH, "%s/.config/redshift/hooks", env);
+		snprintf(hp, MAX_HOOK_PATH, "%s/.config/" CONFIG_DIR "/hooks", env);
 		return opendir(hp);
 	}
 
 	struct passwd *pwd = getpwuid(getuid());
-	snprintf(hp, MAX_HOOK_PATH, "%s/.config/redshift/hooks", pwd->pw_dir);
+	snprintf(hp, MAX_HOOK_PATH, "%s/.config/" CONFIG_DIR "/hooks", pwd->pw_dir);
 	return opendir(hp);
 }
 

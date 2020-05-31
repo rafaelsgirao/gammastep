@@ -13,48 +13,32 @@ EXTRA_ROOTDOC_FILES = \
 	DESIGN \
 	README \
 	README-colorramp \
-	redshift.conf.sample
+	gammastep.conf.sample
 
 _HICOLOR_FILES = \
-	data/icons/hicolor/scalable/apps/redshift.svg \
-	data/icons/hicolor/scalable/apps/redshift-status-on.svg \
-	data/icons/hicolor/scalable/apps/redshift-status-off.svg
-
-_UBUNTU_MONO_DARK_FILES = \
-	data/icons/ubuntu-mono-dark/scalable/apps/redshift-status-on.svg \
-	data/icons/ubuntu-mono-dark/scalable/apps/redshift-status-off.svg
-
-_UBUNTU_MONO_LIGHT_FILES = \
-	data/icons/ubuntu-mono-light/scalable/apps/redshift-status-on.svg \
-	data/icons/ubuntu-mono-light/scalable/apps/redshift-status-off.svg
+	data/icons/hicolor/scalable/apps/gammastep.svg \
+	data/icons/hicolor/scalable/apps/gammastep-status-on.svg \
+	data/icons/hicolor/scalable/apps/gammastep-status-off.svg
 
 DESKTOP_IN_FILES = \
-	data/applications/redshift.desktop.in \
-	data/applications/redshift-gtk.desktop.in
+	data/applications/gammastep.desktop.in \
+	data/applications/gammastep-indicator.desktop.in
 
 SYSTEMD_USER_UNIT_IN_FILES = \
-	data/systemd/redshift.service.in \
-	data/systemd/redshift-gtk.service.in
+	data/systemd/gammastep.service.in \
+	data/systemd/gammastep-indicator.service.in
 
 APPDATA_IN_FILES = \
-	data/appdata/redshift-gtk.appdata.xml.in
+	data/appdata/gammastep-indicator.appdata.xml.in
 
 APPARMOR_IN_FILES = \
-	data/apparmor/usr.bin.redshift.in
+	data/apparmor/com.gitlab.chinstrap.gammastep.in
 
 
 # Icons
 if ENABLE_GUI
 hicolor_icondir = @datadir@/icons/hicolor/scalable/apps
 hicolor_icon_DATA = $(_HICOLOR_FILES)
-
-if ENABLE_UBUNTU
-ubuntu_mono_dark_icondir = @datadir@/icons/ubuntu-mono-dark/scalable/apps
-ubuntu_mono_dark_icon_DATA = $(_UBUNTU_MONO_DARK_FILES)
-
-ubuntu_mono_light_icondir = @datadir@/icons/ubuntu-mono-light/scalable/apps
-ubuntu_mono_light_icon_DATA = $(_UBUNTU_MONO_LIGHT_FILES)
-endif
 endif
 
 
@@ -81,7 +65,7 @@ endif
 
 
 # man page
-dist_man1_MANS = redshift.1
+dist_man1_MANS = gammastep.1
 
 
 # Systemd service files
@@ -123,8 +107,6 @@ endif
 EXTRA_DIST = \
 	$(EXTRA_ROOTDOC_FILES) \
 	$(_HICOLOR_FILES) \
-	$(_UBUNTU_MONO_DARK_FILES) \
-	$(_UBUNTU_MONO_LIGHT_FILES) \
 	$(DESKTOP_IN_FILES) \
 	$(SYSTEMD_USER_UNIT_IN_FILES) \
 	$(APPDATA_IN_FILES) \
@@ -140,4 +122,4 @@ CLEANFILES = \
 # Update PO translations
 .PHONY: update-po
 update-po:
-	cd po && $(MAKE) POTFILES redshift.pot update-po
+	cd po && $(MAKE) POTFILES gammastep.pot update-po

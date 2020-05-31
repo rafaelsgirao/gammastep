@@ -191,7 +191,7 @@ on_name_appeared(GDBusConnection *conn, const gchar *name,
 		g_variant_new("(ssv)",
 		"org.freedesktop.GeoClue2.Client",
 		"DesktopId",
-		g_variant_new("s", "redshift")),
+		g_variant_new("s", "gammastep")),
 		G_DBUS_CALL_FLAGS_NONE,
 		-1, NULL, &error);
 	if (ret_v == NULL) {

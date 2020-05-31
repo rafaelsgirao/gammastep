@@ -26,6 +26,7 @@
 
 #define MAX_CONFIG_PATH  4096
 #define MAX_LINE_LENGTH   512
+#define CONFIG_DIR "gammastep"
 
 
 static FILE *
@@ -38,8 +39,7 @@ open_config_file(const char *filepath)
 	   specified by the XDG Base Directory Specification
 	   <http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html>.
 
-	   If HOME is not set, getpwuid() is consulted for the home directory. On
-	   windows platforms the %localappdata% is used in place of XDG_CONFIG_HOME.
+	   If HOME is not set, getpwuid() is consulted for the home directory.
 	*/
 
 	if (filepath == NULL) {
@@ -50,41 +50,23 @@ open_config_file(const char *filepath)
 		if (f == NULL && (env = getenv("XDG_CONFIG_HOME")) != NULL &&
 		    env[0] != '\0') {
 			snprintf(cp, sizeof(cp),
-					 "%s/redshift/redshift.conf", env);
+					 "%s/" CONFIG_DIR "/config.ini", env);
 			f = fopen(cp, "r");
-			if (f == NULL) {
-				/* Fall back to formerly used path. */
-				snprintf(cp, sizeof(cp),
-						 "%s/redshift.conf", env);
-				f = fopen(cp, "r");
-			}
 		}
 
 		if (f == NULL && (env = getenv("HOME")) != NULL &&
 		    env[0] != '\0') {
 			snprintf(cp, sizeof(cp),
-				 "%s/.config/redshift/redshift.conf", env);
+				 "%s/.config/" CONFIG_DIR "/config.ini", env);
 			f = fopen(cp, "r");
-			if (f == NULL) {
-				/* Fall back to formerly used path. */
-				snprintf(cp, sizeof(cp),
-					 "%s/.config/redshift.conf", env);
-				f = fopen(cp, "r");
-			}
 		}
 
 		if (f == NULL) {
 			struct passwd *pwd = getpwuid(getuid());
 			char *home = pwd->pw_dir;
 			snprintf(cp, sizeof(cp),
-				 "%s/.config/redshift/redshift.conf", home);
+				 "%s/.config/" CONFIG_DIR "/config.ini", home);
 			f = fopen(cp, "r");
-			if (f == NULL) {
-				/* Fall back to formerly used path. */
-				snprintf(cp, sizeof(cp),
-					 "%s/.config/redshift.conf", home);
-				f = fopen(cp, "r");
-			}
 		}
 
 		if (f == NULL && (env = getenv("XDG_CONFIG_DIRS")) != NULL &&
@@ -97,14 +79,9 @@ open_config_file(const char *filepath)
 				int len = end - begin;
 				if (len > 0) {
 					snprintf(cp, sizeof(cp),
-						 "%.*s/redshift/redshift.conf", len, begin);
+						 "%.*s/" CONFIG_DIR "/config.ini",
+						 len, begin);
 					f = fopen(cp, "r");
-					if (f != NULL) {
-						/* Fall back to formerly used path. */
-						snprintf(cp, sizeof(cp),
-							 "%.*s/redshift.conf", len, begin);
-						f = fopen(cp, "r");
-					}
 					if (f != NULL) break;
 				}
 
@@ -114,8 +91,7 @@ open_config_file(const char *filepath)
 		}
 
 		if (f == NULL) {
-			snprintf(cp, sizeof(cp),
-				 "%s/redshift.conf", "/etc");
+			snprintf(cp, sizeof(cp), "/etc/" CONFIG_DIR "/config.ini");
 			f = fopen(cp, "r");
 		}
 

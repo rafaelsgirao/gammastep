@@ -11,5 +11,5 @@ import sys
 sys.path.append('@pythondir@')
 
 if __name__ == '__main__':
-    from redshift_gtk.statusicon import run
+    from gammastep_indicator.statusicon import run
     run()

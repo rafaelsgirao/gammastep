@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([redshift], [1.12], [https://github.com/jonls/redshift/issues])
+AC_INIT([gammastep], [1.12], [https://gitlab.com/chinstrap/gammastep/issues])
 AC_CONFIG_SRCDIR([src/redshift.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -24,7 +24,7 @@ AC_CANONICAL_HOST
 AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
 
-GETTEXT_PACKAGE=redshift
+GETTEXT_PACKAGE=gammastep
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
@@ -191,18 +191,6 @@ AS_IF([test "x$enable_gui" != xno], [
 ])
 AM_CONDITIONAL([ENABLE_GUI], [test "x$enable_gui" != xno])
 
-# Check for Ubuntu icons
-AC_MSG_CHECKING([whether to enable Ubuntu icons])
-AC_ARG_ENABLE([ubuntu], [AC_HELP_STRING([--enable-ubuntu],
-	[enable Ubuntu icons])],
-        [enable_ubuntu=$enableval],[enable_ubuntu=no])
-AS_IF([test "x$enable_ubuntu" != xno], [
-        AC_MSG_RESULT([yes])
-], [
-        AC_MSG_RESULT([no])
-])
-AM_CONDITIONAL([ENABLE_UBUNTU], [test "x$enable_ubuntu" != xno])
-
 
 # Check for systemd
 PKG_PROG_PKG_CONFIG
@@ -252,7 +240,7 @@ AC_CONFIG_FILES([
 	Makefile
 	po/Makefile.in
 	src/Makefile
-	src/redshift-gtk/Makefile
+	src/gammastep_indicator/Makefile
 ])
 AC_OUTPUT
 
@@ -275,7 +263,6 @@ echo "
     Geoclue2:			${enable_geoclue2}
 
     GUI:		${enable_gui}
-    Ubuntu icons:	${enable_ubuntu}
     systemd units:	${enable_systemd} ${systemduserunitdir}
     AppArmor profile:   ${enable_apparmor}
 "

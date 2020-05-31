@@ -102,7 +102,7 @@ int create_tmpfile_cloexec(char *tmpname) {
  * SIGBUS on accessing mmap()'ed file contents instead.
  */
 int os_create_anonymous_file(off_t size) {
-	static const char template[] = "/redshift-shared-XXXXXX";
+	static const char template[] = "/gammastep-shared-XXXXXX";
 
 	const char *path = getenv("XDG_RUNTIME_DIR");
 	if (!path) {
