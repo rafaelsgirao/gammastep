@@ -616,8 +616,10 @@ options_parse_config_file(
 	const location_provider_t *location_providers)
 {
 	/* Read global config settings. */
-	config_ini_section_t *section = config_ini_get_section(
-		config_state, "redshift");
+	config_ini_section_t *section;
+	section = config_ini_get_section(config_state, "general");
+	if (section == NULL)
+		section = config_ini_get_section(config_state, "redshift");
 	if (section == NULL) return;
 
 	config_ini_setting_t *setting = section->settings;
