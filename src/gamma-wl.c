@@ -1,21 +1,6 @@
-/* gamma-wl.c -- Wayland gamma adjustment header
-   This file is part of Redshift.
-
-   Redshift is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   Redshift is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with Redshift.  If not, see <http://www.gnu.org/licenses/>.
-
-   Copyright (c) 2015  Giulio Camuffo <giuliocamuffo@gmail.com>
-*/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (c) 2015  Giulio Camuffo <giuliocamuffo@gmail.com>
+// gamma-wl.c -- Wayland gamma adjustment header
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,7 +66,7 @@ authorizer_feedback_granted(void *data, struct orbital_authorizer_feedback *feed
 static void
 authorizer_feedback_denied(void *data, struct orbital_authorizer_feedback *feedback)
 {
-	fprintf(stderr, _("Fatal: redshift was not authorized to bind the 'zwlr_gamma_control_manager_v1' interface.\n"));
+	fprintf(stderr, _("Fatal: not authorized to bind the wlroots gamma control manager interface.\n"));
 	exit(EXIT_FAILURE);
 }
 

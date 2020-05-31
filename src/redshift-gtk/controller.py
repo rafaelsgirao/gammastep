@@ -1,20 +1,7 @@
-# controller.py -- Redshift child process controller
-# This file is part of Redshift.
-
-# Redshift is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# Redshift is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with Redshift.  If not, see <http://www.gnu.org/licenses/>.
-
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (c) 2013-2017  Jon Lund Steffensen <jonlst@gmail.com>
+
+"""controller.py -- child process controller"""
 
 import os
 import re
@@ -30,7 +17,7 @@ from . import defs
 
 
 class RedshiftController(GObject.GObject):
-    """GObject wrapper around the Redshift child process."""
+    """GObject wrapper around the child process."""
 
     __gsignals__ = {
         'inhibit-changed': (GObject.SIGNAL_RUN_FIRST, None, (bool,)),
@@ -55,8 +42,8 @@ class RedshiftController(GObject.GObject):
         self._period = 'Unknown'
         self._location = (0.0, 0.0)
 
-        # Start redshift with arguments
-        args.insert(0, os.path.join(defs.BINDIR, 'redshift'))
+        # Start program with arguments
+        args.insert(0, os.path.join(defs.BINDIR, defs.COMMAND))
         if '-v' not in args:
             args.insert(1, '-v')
 
@@ -97,7 +84,7 @@ class RedshiftController(GObject.GObject):
                 self._process[3], GLib.PRIORITY_DEFAULT, GLib.IO_IN,
                 self._child_data_cb, (False, self._error_buffer))
 
-            # Signal handler to relay USR1 signal to redshift process
+            # Signal handler to relay USR1 signal to process
             def relay_signal_handler(signal):
                 os.kill(self._process[0], signal)
                 return True

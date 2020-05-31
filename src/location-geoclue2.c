@@ -1,21 +1,6 @@
-/* location-geoclue2.c -- GeoClue2 location provider source
-   This file is part of Redshift.
-
-   Redshift is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   Redshift is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with Redshift.  If not, see <http://www.gnu.org/licenses/>.
-
-   Copyright (c) 2014-2017  Jon Lund Steffensen <jonlst@gmail.com>
-*/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (c) 2014-2017  Jon Lund Steffensen <jonlst@gmail.com>
+// location-geoclue2.c -- GeoClue2 location provider source
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -60,11 +45,9 @@ static void
 print_denial_message()
 {
 	g_printerr(_(
-		"Access to the current location was denied by GeoClue!\n"
-		"Make sure that location services are enabled and that"
-		" Redshift is permitted\nto use location services."
-		" See https://github.com/jonls/redshift#faq for more\n"
-		"information.\n"));
+		"Access to the current location was denied!\n"
+		"Ensure location services are enabled and access by"
+		" this program is permitted.\n"));
 }
 
 /* Indicate an unrecoverable error during GeoClue2 communication. */
