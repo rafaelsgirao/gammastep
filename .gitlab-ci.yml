@@ -7,8 +7,6 @@ stages:
 
 default:
   stage: build
-  except:
-    - tags
   script:
     - ./bootstrap
     - mkdir build
@@ -21,18 +19,3 @@ default:
     - ./src/gammastep -c time.config -pv
     - ./src/gammastep -c time.config -m dummy -vo
     - make distcheck
-
-release:
-  stage: build
-  only:
-    - tags
-  script:
-    - ./bootstrap
-    - mkdir build
-    - cd build
-    - ../configure
-    - make distcheck
-  artifacts:
-    paths:
-      - build/gammastep-*.tar.*
-    expire_in: "4 hrs"
