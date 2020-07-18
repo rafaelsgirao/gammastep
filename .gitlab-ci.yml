@@ -1,0 +1,16 @@
+image:
+  name: cameronnemo/gitlab-ci-gammastep
+  entrypoint: [""]
+
+stages:
+  - build
+
+autotools:
+  stage: build
+  script:
+    - ./bootstrap
+    - mkdir build
+    - cd build
+    - ../configure --enable-drm --enable-vidmode --enable-randr --enable-geoclue2 --enable-gui --enable-apparmor --with-systemduserunitdir=no
+    - make
+    - make distcheck
