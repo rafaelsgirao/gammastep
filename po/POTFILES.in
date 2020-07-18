@@ -1,8 +1,8 @@
 # List of source files containing translatable strings
 
-data/appdata/redshift-gtk.appdata.xml.in
-data/applications/redshift.desktop.in
-data/applications/redshift-gtk.desktop.in
+data/appdata/gammastep-indicator.appdata.xml.in
+data/applications/gammastep.desktop.in
+data/applications/gammastep-indicator.desktop.in
 
 src/redshift.c
 src/options.c
@@ -17,4 +17,4 @@ src/gamma-dummy.c
 src/location-geoclue2.c
 src/location-manual.c
 
-src/redshift-gtk/statusicon.py
+src/gammastep_indicator/statusicon.py
