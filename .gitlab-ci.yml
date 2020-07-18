@@ -5,12 +5,34 @@ image:
 stages:
   - build
 
-autotools:
+default:
   stage: build
+  except:
+    - tags
   script:
     - ./bootstrap
     - mkdir build
     - cd build
     - ../configure --enable-drm --enable-vidmode --enable-randr --enable-geoclue2 --enable-gui --enable-apparmor --with-systemduserunitdir=no
     - make
+    - ./src/gammastep -l 12:-34 -pv
+    - ./src/gammastep -l 12:-34 -m dummy -vo
+    - echo -e "[general]\ndawn-time=6:30\ndusk-time=18:00-19:30" > time.config
+    - ./src/gammastep -c time.config -pv
+    - ./src/gammastep -c time.config -m dummy -vo
     - make distcheck
+
+release:
+  stage: build
+  only:
+    - tags
+  script:
+    - ./bootstrap
+    - mkdir build
+    - cd build
+    - ../configure
+    - make distcheck
+  artifacts:
+    paths:
+      - build/gammastep-*.tar.*
+    expire_in: "4 hrs"
