@@ -1,6 +1,17 @@
 News
 ====
 
+v2.0 (2020-07-18)
+-----------------
+- Rename from redshift to gammastep
+- Remove macOS and Windows support
+- Support wlroots gamma control protocol
+- Fix issue with continuously resetting temperature while disabled
+- Fix dependency and other issues with systemd unit files
+- Fix potential crash in GeoClue code
+- Fallback to manual location provider if GeoClue fails
+- Adjust AppArmor profile to support hooks and wlroots features
+
 v1.12 (2018-05-20)
 ------------------
 - Change location providers to allow updates. GeoClue and CoreLocation now
