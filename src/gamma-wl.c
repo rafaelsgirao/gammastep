@@ -86,7 +86,7 @@ registry_global(void *data, struct wl_registry *registry, uint32_t id, const cha
 	} else if (strcmp(interface, "wl_output") == 0) {
 		state->num_outputs++;
 		if (!(state->outputs = realloc(state->outputs, state->num_outputs * sizeof(struct output)))) {
-			fprintf(stderr, _("Failed to allcate memory\n"));
+			fprintf(stderr, _("Failed to allocate memory\n"));
 			return;
 		}
 
@@ -282,13 +282,28 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 		return ret;
 	}
 
+	int unsupported_outputs = 0;
 	for (int i = 0; i < state->num_outputs; ++i) {
 		struct output *output = &state->outputs[i];
+		if (output->gamma_size == 0) {
+			// output does not support gamma control
+			unsupported_outputs += 1;
+			continue;
+		}
 		if (!output->gamma_control) {
 			output->gamma_control = zwlr_gamma_control_manager_v1_get_gamma_control(state->gamma_control_manager, output->output);
 			zwlr_gamma_control_v1_add_listener(output->gamma_control, &gamma_control_listener, output);
 			roundtrip = 1;
 		}
+	}
+	if (state->num_outputs == unsupported_outputs) {
+		fprintf(stderr, _("Fatal: zero outputs support gamma adjustment.\n"));
+		exit(EXIT_FAILURE);
+	}
+	if (unsupported_outputs > 0) {
+		fprintf(stderr, "Warning: %d/%d %s.\n",
+		        unsupported_outputs, state->num_outputs,
+		        _("output(s) do not support gamma adjustment"));
 	}
 	if (roundtrip) {
 		wl_display_roundtrip(state->display);
@@ -296,6 +311,10 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 
 	for (int i = 0; i < state->num_outputs; ++i) {
 		struct output *output = &state->outputs[i];
+		if (output->gamma_size == 0) {
+			// output does not support gamma control
+			continue;
+		}
 		int size = output->gamma_size;
 		size_t ramp_bytes = size * sizeof(uint16_t);
 		size_t total_bytes = ramp_bytes * 3;
