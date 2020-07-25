@@ -234,7 +234,7 @@ AC_TYPE_UINT16_T
 # Checks for library functions.
 AC_SEARCH_LIBS([clock_gettime], [rt])
 AC_SEARCH_LIBS([floor], [m])
-AC_CHECK_FUNCS([setlocale strchr floor pow])
+AC_CHECK_FUNCS([setlocale strchr floor pow posix_fallocate mkostemp])
 
 AC_CONFIG_FILES([
 	Makefile
@@ -260,7 +260,7 @@ echo "
     VidMode:		${enable_vidmode}
 
     Location providers:
-    Geoclue2:			${enable_geoclue2}
+    Geoclue2:		${enable_geoclue2}
 
     GUI:		${enable_gui}
     systemd units:	${enable_systemd} ${systemduserunitdir}

@@ -124,7 +124,7 @@ int os_create_anonymous_file(off_t size) {
 		return -1;
 	}
 
-#ifdef WLR_HAS_POSIX_FALLOCATE
+#ifdef HAVE_POSIX_FALLOCATE
 	int ret;
 	do {
 		ret = posix_fallocate(fd, 0, size);
