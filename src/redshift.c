@@ -639,9 +639,11 @@ run_continual_mode(const location_provider_t *provider,
 		}
 
 		/* Print status change */
-		if (verbose && disabled != prev_disabled) {
-			printf(_("Status: %s\n"), disabled ?
-			       _("Disabled") : _("Enabled"));
+		if (disabled != prev_disabled) {
+			if (verbose) {
+				printf(_("Status: %s\n"), disabled ?
+				       _("Disabled") : _("Enabled"));
+			}
 			should_reset = 1;
 		}
 
