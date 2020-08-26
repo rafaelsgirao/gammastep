@@ -36,8 +36,8 @@ typedef struct {
 	int pipe_fd_write;
 	int available;
 	int error;
-	float latitude;
-	float longitude;
+	gdouble latitude;
+	gdouble longitude;
 } location_geoclue2_state_t;
 
 
