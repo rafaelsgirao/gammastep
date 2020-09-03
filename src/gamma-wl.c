@@ -23,6 +23,7 @@
 #include "gamma-wl.h"
 #include "os-compatibility.h"
 #include "colorramp.h"
+#include "vlog.h"
 
 #include "gamma-control-client-protocol.h"
 #include "orbital-authorizer-client-protocol.h"
@@ -66,7 +67,7 @@ authorizer_feedback_granted(void *data, struct orbital_authorizer_feedback *feed
 static void
 authorizer_feedback_denied(void *data, struct orbital_authorizer_feedback *feedback)
 {
-	fprintf(stderr, _("Fatal: not authorized to bind the wlroots gamma control manager interface.\n"));
+	vlog_err(_("Not authorized to bind the wlroots gamma control manager interface."));
 	exit(EXIT_FAILURE);
 }
 
@@ -86,7 +87,7 @@ registry_global(void *data, struct wl_registry *registry, uint32_t id, const cha
 	} else if (strcmp(interface, "wl_output") == 0) {
 		state->num_outputs++;
 		if (!(state->outputs = realloc(state->outputs, state->num_outputs * sizeof(struct output)))) {
-			fprintf(stderr, _("Failed to allocate memory\n"));
+			vlog_err(_("Failed to allocate memory"));
 			return;
 		}
 
@@ -120,7 +121,7 @@ registry_global_remove(void *data, struct wl_registry *registry, uint32_t id)
 	wayland_state_t *state = data;
 
 	if (state->gamma_control_manager_id == id) {
-		fprintf(stderr, _("The zwlr_gamma_control_manager_v1 was removed\n"));
+		vlog_err(_("The zwlr_gamma_control_manager_v1 was removed"));
 		exit(EXIT_FAILURE);
 	}
 
@@ -173,7 +174,7 @@ wayland_start(wayland_state_t *state)
 {
 	state->display = wl_display_connect(NULL);
 	if (!state->display) {
-		fputs(_("Could not connect to wayland display, exiting.\n"), stderr);
+		vlog_err(_("Could not connect to wayland display, exiting."));
 		return -1;
 	}
 	state->registry = wl_display_get_registry(state->display);
@@ -214,7 +215,7 @@ wayland_free(wayland_state_t *state)
 		ret = wl_display_dispatch(state->display);
 	}
 	if (state->callback) {
-		fprintf(stderr, _("Ignoring error on wayland connection while waiting to disconnect: %d\n"), ret);
+		vlog_err(_("Ignoring error on wayland connection while waiting to disconnect: %d"), ret);
 		wl_callback_destroy(state->callback);
 	}
 
@@ -278,17 +279,20 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 		ret = wl_display_dispatch(state->display);
 	}
 	if (ret < 0) {
-		fprintf(stderr, _("The Wayland connection experienced a fatal error: %d\n"), ret);
+		vlog_err(_("Wayland connection experienced a fatal error: %d"), ret);
 		return ret;
 	}
 
 	int unsupported_outputs = 0;
+	vlog_debug(_("Evaluating %d wlroots outputs"), state->num_outputs);
 	for (int i = 0; i < state->num_outputs; ++i) {
 		struct output *output = &state->outputs[i];
 		if (output->gamma_size == 0) {
-			// output does not support gamma control
+			vlog_info(_("Discovered output that does not support gamma control"));
 			unsupported_outputs += 1;
 			continue;
+		} else {
+			vlog_debug(_("Discovered output that supports gamma control"));
 		}
 		if (!output->gamma_control) {
 			output->gamma_control = zwlr_gamma_control_manager_v1_get_gamma_control(state->gamma_control_manager, output->output);
@@ -297,13 +301,12 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 		}
 	}
 	if (state->num_outputs == unsupported_outputs) {
-		fprintf(stderr, _("Fatal: zero outputs support gamma adjustment.\n"));
+		vlog_err(_("Zero outputs support gamma adjustment."));
 		exit(EXIT_FAILURE);
 	}
 	if (unsupported_outputs > 0) {
-		fprintf(stderr, "Warning: %d/%d %s.\n",
-		        unsupported_outputs, state->num_outputs,
-		        _("output(s) do not support gamma adjustment"));
+		vlog_warning("%d/%d %s.", unsupported_outputs, state->num_outputs,
+		             _("output(s) do not support gamma adjustment"));
 	}
 	if (roundtrip) {
 		wl_display_roundtrip(state->display);
@@ -321,14 +324,14 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 
 		int fd = os_create_anonymous_file(total_bytes);
 		if (fd < 0) {
-			perror("os_create_anonymous_file");
+			vlog_err("os_create_anonymous_file: %m");
 			return -1;
 		}
 
 		void *ptr = mmap(NULL, total_bytes,
 			PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 		if (ptr == MAP_FAILED) {
-			perror("mmap");
+			vlog_err("mmap: %m");
 			close(fd);
 			return -1;
 		}
@@ -347,7 +350,7 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 
 		colorramp_fill(r_gamma, g_gamma, b_gamma, size, setting);
 		if (munmap(ptr, total_bytes) == -1) {
-			perror("munmap");
+			vlog_err("munmap: %m");
 			close(fd);
 			return -1;
 		}

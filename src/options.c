@@ -154,7 +154,8 @@ print_help(const char *program_name)
 	/* TRANSLATORS: help output 3
 	   no-wrap */
 	fputs(_("  -h\t\tDisplay this help message\n"
-		"  -v\t\tVerbose output\n"
+		"  -v\t\tIncrease logging verbosity\n"
+		"  -q\t\tDecrease logging verbosity\n"
 		"  -V\t\tShow program version\n"), stdout);
 	fputs("\n", stdout);
 
@@ -307,7 +308,7 @@ options_init(options_t *options)
 	options->use_fade = -1;
 	options->preserve_gamma = 1;
 	options->mode = PROGRAM_MODE_CONTINUAL;
-	options->verbose = 0;
+	options->verbose = 4;
 }
 
 /* Parse a single option from the command-line. */
@@ -453,7 +454,12 @@ parse_command_line_option(
 		options->scheme.night.temperature = atoi(s);
 		break;
 	case 'v':
-		options->verbose = 1;
+		if (options->verbose < 8)
+			options->verbose += 1;
+		break;
+	case 'q':
+		if (options->verbose > 0)
+			options->verbose -= 1;
 		break;
 	case 'V':
 		printf("%s\n", PACKAGE_STRING);

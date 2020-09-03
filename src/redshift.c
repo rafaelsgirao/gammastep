@@ -35,6 +35,7 @@
 #include "hooks.h"
 #include "signals.h"
 #include "options.h"
+#include "vlog.h"
 
 #include "gamma-dummy.h"
 
@@ -170,7 +171,7 @@ get_seconds_since_midnight(double timestamp)
 	return tm.tm_sec + tm.tm_min * 60 + tm.tm_hour * 3600;
 }
 
-/* Print verbose description of the given period. */
+/* Log description of the given period. */
 static void
 print_period(period_t period, double transition)
 {
@@ -178,12 +179,12 @@ print_period(period_t period, double transition)
 	case PERIOD_NONE:
 	case PERIOD_NIGHT:
 	case PERIOD_DAYTIME:
-		printf(_("Period: %s\n"), gettext(period_names[period]));
+		vlog_notice(_("Period: %s"), gettext(period_names[period]));
 		break;
 	case PERIOD_TRANSITION:
-		printf(_("Period: %s (%.2f%% day)\n"),
-		       gettext(period_names[period]),
-		       transition*100);
+		vlog_notice(_("Period: %s (%.2f%% day)"),
+		            gettext(period_names[period]),
+		            transition*100);
 		break;
 	}
 }
@@ -201,12 +202,9 @@ print_location(const location_t *location)
 	/* TRANSLATORS: Abbreviation for `west' */
 	const char *west = _("W");
 
-	/* TRANSLATORS: Append degree symbols after %f if possible.
-	   The string following each number is an abreviation for
-	   north, source, east or west (N, S, E, W). */
-	printf(_("Location: %.2f %s, %.2f %s\n"),
-	       fabs(location->lat), location->lat >= 0.f ? north : south,
-	       fabs(location->lon), location->lon >= 0.f ? east : west);
+	vlog_notice("%s: %.2f %s, %.2f %s", _("Location"),
+	            fabs(location->lat), location->lat >= 0.f ? north : south,
+	            fabs(location->lon), location->lon >= 0.f ? east : west);
 }
 
 /* Interpolate color setting structs given alpha. */
@@ -278,8 +276,7 @@ provider_try_start(const location_provider_t *provider,
 
 	r = provider->init(state);
 	if (r < 0) {
-		fprintf(stderr, _("Initialization of %s failed.\n"),
-			provider->name);
+		vlog_err(_("Initialization of %s failed."), provider->name);
 		return -1;
 	}
 
@@ -293,14 +290,12 @@ provider_try_start(const location_provider_t *provider,
 						 setting->value);
 			if (r < 0) {
 				provider->free(*state);
-				fprintf(stderr, _("Failed to set %s"
-						  " option.\n"),
-					provider->name);
+				vlog_err(_("Failed to set %s option."),
+				         provider->name);
 				/* TRANSLATORS: `help' must not be
 				   translated. */
-				fprintf(stderr, _("Try `-l %s:help' for more"
-						  " information.\n"),
-					provider->name);
+				vlog_err(_("Try `-l %s:help' for more information."),
+					 provider->name);
 				return -1;
 			}
 			setting = setting->next;
@@ -326,8 +321,7 @@ provider_try_start(const location_provider_t *provider,
 				key = manual_keys[i];
 				value = args;
 			} else {
-				fprintf(stderr, _("Failed to parse option `%s'.\n"),
-					args);
+				vlog_err(_("Failed to parse option `%s'."), args);
 				return -1;
 			}
 		} else {
@@ -337,11 +331,10 @@ provider_try_start(const location_provider_t *provider,
 		r = provider->set_option(*state, key, value);
 		if (r < 0) {
 			provider->free(*state);
-			fprintf(stderr, _("Failed to set %s option.\n"),
-				provider->name);
+			vlog_err(_("Failed to set %s option."), provider->name);
 			/* TRANSLATORS: `help' must not be translated. */
-			fprintf(stderr, _("Try `-l %s:help' for more"
-					  " information.\n"), provider->name);
+			vlog_err(_("Try `-l %s:help' for more information."),
+			         provider->name);
 			return -1;
 		}
 
@@ -353,8 +346,7 @@ provider_try_start(const location_provider_t *provider,
 	r = provider->start(*state);
 	if (r < 0) {
 		provider->free(*state);
-		fprintf(stderr, _("Failed to start provider %s.\n"),
-			provider->name);
+		vlog_err(_("Failed to start provider %s."), provider->name);
 		return -1;
 	}
 
@@ -369,8 +361,7 @@ method_try_start(const gamma_method_t *method,
 
 	r = method->init(state);
 	if (r < 0) {
-		fprintf(stderr, _("Initialization of %s failed.\n"),
-			method->name);
+		vlog_err(_("Initialization of %s failed."), method->name);
 		return -1;
 	}
 
@@ -384,14 +375,11 @@ method_try_start(const gamma_method_t *method,
 				*state, setting->name, setting->value);
 			if (r < 0) {
 				method->free(*state);
-				fprintf(stderr, _("Failed to set %s"
-						  " option.\n"),
-					method->name);
+				vlog_err(_("Failed to set %s option."), method->name);
 				/* TRANSLATORS: `help' must not be
 				   translated. */
-				fprintf(stderr, _("Try `-m %s:help' for more"
-						  " information.\n"),
-					method->name);
+				vlog_err(_("Try `-m %s:help' for more information."),
+				         method->name);
 				return -1;
 			}
 			setting = setting->next;
@@ -406,8 +394,7 @@ method_try_start(const gamma_method_t *method,
 		const char *key = args;
 		char *value = strchr(args, '=');
 		if (value == NULL) {
-			fprintf(stderr, _("Failed to parse option `%s'.\n"),
-				args);
+			vlog_err(_("Failed to parse option `%s'."), args);
 			return -1;
 		} else {
 			*(value++) = '\0';
@@ -416,11 +403,10 @@ method_try_start(const gamma_method_t *method,
 		r = method->set_option(*state, key, value);
 		if (r < 0) {
 			method->free(*state);
-			fprintf(stderr, _("Failed to set %s option.\n"),
-				method->name);
+			vlog_err(_("Failed to set %s option."), method->name);
 			/* TRANSLATORS: `help' must not be translated. */
-			fprintf(stderr, _("Try -m %s:help' for more"
-					  " information.\n"), method->name);
+			vlog_err(_("Try -m %s:help' for more information."),
+			         method->name);
 			return -1;
 		}
 
@@ -431,8 +417,7 @@ method_try_start(const gamma_method_t *method,
 	r = method->start(*state);
 	if (r < 0) {
 		method->free(*state);
-		fprintf(stderr, _("Failed to start adjustment method %s.\n"),
-			method->name);
+		vlog_err(_("Failed to start adjustment method %s."), method->name);
 		return -1;
 	}
 
@@ -461,18 +446,16 @@ location_is_valid(const location_t *location)
 	/* Latitude */
 	if (location->lat < MIN_LAT || location->lat > MAX_LAT) {
 		/* TRANSLATORS: Append degree symbols if possible. */
-		fprintf(stderr,
-			_("Latitude must be between %.1f and %.1f.\n"),
-			MIN_LAT, MAX_LAT);
+		vlog_err(_("Latitude must be between %.1f and %.1f."),
+		         MIN_LAT, MAX_LAT);
 		return 0;
 	}
 
 	/* Longitude */
 	if (location->lon < MIN_LON || location->lon > MAX_LON) {
 		/* TRANSLATORS: Append degree symbols if possible. */
-		fprintf(stderr,
-			_("Longitude must be between"
-			  " %.1f and %.1f.\n"), MIN_LON, MAX_LON);
+		vlog_err(_("Longitude must be betweeen %.1f and %.1f."),
+		         MIN_LON, MAX_LON);
 		return 0;
 	}
 
@@ -498,8 +481,7 @@ provider_get_location(
 			double now;
 			int r = systemtime_get_time(&now);
 			if (r < 0) {
-				fputs(_("Unable to read system time.\n"),
-				      stderr);
+				vlog_err(_("Unable to read system time."));
 				return -1;
 			}
 
@@ -517,8 +499,7 @@ provider_get_location(
 			double later;
 			r = systemtime_get_time(&later);
 			if (r < 0) {
-				fputs(_("Unable to read system time.\n"),
-				      stderr);
+				vlog_err(_("Unable to read system time."));
 				return -1;
 			}
 
@@ -559,7 +540,7 @@ run_continual_mode(const location_provider_t *provider,
 		   const transition_scheme_t *scheme,
 		   const gamma_method_t *method,
 		   gamma_state_t *method_state,
-		   int use_fade, int preserve_gamma, int verbose)
+		   int use_fade, int preserve_gamma)
 {
 	int r;
 
@@ -588,30 +569,25 @@ run_continual_mode(const location_provider_t *provider,
 	location_t loc = { NAN, NAN };
 	int need_location = !scheme->use_time;
 	if (need_location) {
-		fputs(_("Waiting for initial location"
-			" to become available...\n"), stderr);
+		vlog_info(_("Waiting for initial location to become available..."));
 
 		/* Get initial location from provider */
 		r = provider_get_location(provider, location_state, -1, &loc);
 		if (r < 0) {
-			fputs(_("Unable to get location"
-				" from provider.\n"), stderr);
+			vlog_err(_("Unable to get location from provider."));
 			return -1;
 		}
 
 		if (!location_is_valid(&loc)) {
-			fputs(_("Invalid location returned from provider.\n"),
-			      stderr);
+			vlog_err(_("Invalid location returned from provider."));
 			return -1;
 		}
 
 		print_location(&loc);
 	}
 
-	if (verbose) {
-		printf(_("Color temperature: %uK\n"), interp.temperature);
-		printf(_("Brightness: %.2f\n"), interp.brightness);
-	}
+	vlog_notice(_("Color temperature: %uK"), interp.temperature);
+	vlog_notice(_("Brightness: %.2f"), interp.brightness);
 
 	/* Continuously adjust color temperature */
 	int done = 0;
@@ -640,10 +616,7 @@ run_continual_mode(const location_provider_t *provider,
 
 		/* Print status change */
 		if (disabled != prev_disabled) {
-			if (verbose) {
-				printf(_("Status: %s\n"), disabled ?
-				       _("Disabled") : _("Enabled"));
-			}
+			vlog_notice(_("Status: %s"), disabled ? _("Disabled") : _("Enabled"));
 			should_reset = 1;
 		}
 
@@ -653,7 +626,7 @@ run_continual_mode(const location_provider_t *provider,
 		double now;
 		r = systemtime_get_time(&now);
 		if (r < 0) {
-			fputs(_("Unable to read system time.\n"), stderr);
+			vlog_err(_("Unable to read system time."));
 			return -1;
 		}
 
@@ -683,8 +656,10 @@ run_continual_mode(const location_provider_t *provider,
 			scheme, transition_prog, &target_interp);
 
 		if (disabled) {
+			vlog_debug("Currently disabled");
 			period = PERIOD_NONE;
 			if (should_reset) {
+				vlog_debug("Resetting in first disabled loop");
 				color_setting_reset(&target_interp);
 			}
 		}
@@ -697,8 +672,7 @@ run_continual_mode(const location_provider_t *provider,
 		   or if we are in the transition period. In transition we
 		   print the progress, so we always print it in
 		   that case. */
-		if (verbose && (period != prev_period ||
-				period == PERIOD_TRANSITION)) {
+		if (period != prev_period || period == PERIOD_TRANSITION) {
 			print_period(period, transition_prog);
 		}
 
@@ -745,26 +719,20 @@ run_continual_mode(const location_provider_t *provider,
 		/* Break loop when done and final fade is over */
 		if (done && fade_length == 0) break;
 
-		if (verbose) {
-			if (prev_target_interp.temperature !=
-			    target_interp.temperature) {
-				printf(_("Color temperature: %uK\n"),
-				       target_interp.temperature);
-			}
-			if (prev_target_interp.brightness !=
-			    target_interp.brightness) {
-				printf(_("Brightness: %.2f\n"),
-				       target_interp.brightness);
-			}
+		if (prev_target_interp.temperature != target_interp.temperature) {
+			vlog_notice(_("Color temperature: %uK"), target_interp.temperature);
+		}
+		if (prev_target_interp.brightness != target_interp.brightness) {
+			vlog_notice(_("Brightness: %.2f"), target_interp.brightness);
 		}
 
 		/* Adjust temperature */
 		if (!disabled || should_reset) {
+			vlog_debug("Adjusting temperature");
 			r = method->set_temperature(
 				method_state, &interp, preserve_gamma);
 			if (r < 0) {
-				fputs(_("Temperature adjustment failed.\n"),
-				      stderr);
+				vlog_err(_("Temperature adjustment failed."));
 				return -1;
 			}
 		}
@@ -796,9 +764,8 @@ run_continual_mode(const location_provider_t *provider,
 			int r = poll(pollfds, 1, delay);
 			if (r < 0) {
 				if (errno == EINTR) continue;
-				perror("poll");
-				fputs(_("Unable to get location"
-					" from provider.\n"), stderr);
+				vlog_err("poll: %m");
+				vlog_err(_("Unable to get location from provider."));
 				return -1;
 			} else if (r == 0) {
 				continue;
@@ -812,17 +779,16 @@ run_continual_mode(const location_provider_t *provider,
 				location_state, &new_loc,
 				&new_available);
 			if (r < 0) {
-				fputs(_("Unable to get location"
-					" from provider.\n"), stderr);
+				vlog_err(_("Unable to get location from provider."));
 				return -1;
 			}
 
 			if (!new_available &&
 			    new_available != location_available) {
-				fputs(_("Location is temporarily"
-				        " unavailable; Using previous"
-					" location until it becomes"
-					" available...\n"), stderr);
+				vlog_err(_("Location is temporarily"
+				         " unavailable; Using previous"
+				         " location until it becomes"
+				         " available..."));
 			}
 
 			if (new_available &&
@@ -836,8 +802,7 @@ run_continual_mode(const location_provider_t *provider,
 			location_available = new_available;
 
 			if (!location_is_valid(&loc)) {
-				fputs(_("Invalid location returned"
-					" from provider.\n"), stderr);
+				vlog_err(_("Invalid location returned from provider."));
 				return -1;
 			}
 		} else {
@@ -904,12 +869,13 @@ main(int argc, char *argv[])
 	options_init(&options);
 	options_parse_args(
 		&options, argc, argv, gamma_methods, location_providers);
+	vlog_lvl_set((vlog_lvl_t) options.verbose);
 
 	/* Load settings from config file. */
 	config_ini_state_t config_state;
 	r = config_ini_init(&config_state, options.config_filepath);
 	if (r < 0) {
-		fputs("Unable to load config file.\n", stderr);
+		vlog_err("Unable to load config file.");
 		exit(EXIT_FAILURE);
 	}
 
@@ -926,16 +892,14 @@ main(int argc, char *argv[])
 		    options.scheme.dawn.end < 0 ||
 		    options.scheme.dusk.start < 0 ||
 		    options.scheme.dusk.end < 0) {
-			fputs(_("Partitial time-configuration not"
-				" supported!\n"), stderr);
+			vlog_err(_("Partial time-configuration unsupported!"));
 			exit(EXIT_FAILURE);
 		}
 
 		if (options.scheme.dawn.start > options.scheme.dawn.end ||
 		    options.scheme.dawn.end > options.scheme.dusk.start ||
 		    options.scheme.dusk.start > options.scheme.dusk.end) {
-			fputs(_("Invalid dawn/dusk time configuration!\n"),
-			      stderr);
+			vlog_err(_("Invalid dawn/dusk time configuration!"));
 			exit(EXIT_FAILURE);
 		}
 
@@ -964,19 +928,17 @@ main(int argc, char *argv[])
 			     location_providers[i].name != NULL; i++) {
 				const location_provider_t *p =
 					&location_providers[i];
-				fprintf(stderr,
-					_("Trying location provider `%s'...\n"),
-					p->name);
+				vlog_info(_("Trying location provider `%s'..."),
+				          p->name);
 				r = provider_try_start(p, &location_state,
 						       &config_state, NULL);
 				if (r < 0) {
-					fputs(_("Trying next provider...\n"),
-					      stderr);
+					vlog_info(_("Trying next provider..."));
 					continue;
 				}
 
 				/* Found provider that works. */
-				printf(_("Using provider `%s'.\n"), p->name);
+				vlog_info(_("Using provider `%s'."), p->name);
 				options.provider = p;
 				break;
 			}
@@ -984,43 +946,37 @@ main(int argc, char *argv[])
 			/* Failure if no providers were successful at this
 			   point. */
 			if (options.provider == NULL) {
-				fputs(_("No more location providers"
-					" to try.\n"), stderr);
+				vlog_err(_("No more location providers to try."));
 				exit(EXIT_FAILURE);
 			}
 		}
 
 		/* Solar elevations */
 		if (options.scheme.high < options.scheme.low) {
-			fprintf(stderr,
+			vlog_err(
 				_("High transition elevation cannot be lower than"
-				  " the low transition elevation.\n"));
+				  " the low transition elevation."));
 			exit(EXIT_FAILURE);
 		}
 
-		if (options.verbose) {
-			/* TRANSLATORS: Append degree symbols if possible. */
-			printf(_("Solar elevations: day above %.1f, night below %.1f\n"),
-			       options.scheme.high, options.scheme.low);
-		}
+		/* TRANSLATORS: Append degree symbols if possible. */
+		vlog_notice(_("Solar elevations: day above %.1f, night below %.1f"),
+		            options.scheme.high, options.scheme.low);
 	}
 
 	if (options.mode != PROGRAM_MODE_RESET &&
 	    options.mode != PROGRAM_MODE_MANUAL) {
-		if (options.verbose) {
-			printf(_("Temperatures: %dK at day, %dK at night\n"),
-			       options.scheme.day.temperature,
-			       options.scheme.night.temperature);
-		}
+		vlog_notice(_("Temperatures: %dK at day, %dK at night"),
+		            options.scheme.day.temperature,
+		            options.scheme.night.temperature);
 
 		/* Color temperature */
 		if (options.scheme.day.temperature < MIN_TEMP ||
 		    options.scheme.day.temperature > MAX_TEMP ||
 		    options.scheme.night.temperature < MIN_TEMP ||
 		    options.scheme.night.temperature > MAX_TEMP) {
-			fprintf(stderr,
-				_("Temperature must be between %uK and %uK.\n"),
-				MIN_TEMP, MAX_TEMP);
+			vlog_err(_("Temperature must be between %uK and %uK."),
+			         MIN_TEMP, MAX_TEMP);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -1029,9 +985,8 @@ main(int argc, char *argv[])
 		/* Check color temperature to be set */
 		if (options.temp_set < MIN_TEMP ||
 		    options.temp_set > MAX_TEMP) {
-			fprintf(stderr,
-				_("Temperature must be between %uK and %uK.\n"),
-				MIN_TEMP, MAX_TEMP);
+			vlog_err(_("Temperature must be between %uK and %uK."),
+			         MIN_TEMP, MAX_TEMP);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -1041,39 +996,33 @@ main(int argc, char *argv[])
 	    options.scheme.day.brightness > MAX_BRIGHTNESS ||
 	    options.scheme.night.brightness < MIN_BRIGHTNESS ||
 	    options.scheme.night.brightness > MAX_BRIGHTNESS) {
-		fprintf(stderr,
-			_("Brightness values must be between %.1f and %.1f.\n"),
-			MIN_BRIGHTNESS, MAX_BRIGHTNESS);
+		vlog_err(_("Brightness values must be between %.1f and %.1f."),
+		         MIN_BRIGHTNESS, MAX_BRIGHTNESS);
 		exit(EXIT_FAILURE);
 	}
 
-	if (options.verbose) {
-		printf(_("Brightness: %.2f:%.2f\n"),
-		       options.scheme.day.brightness,
-		       options.scheme.night.brightness);
-	}
+	vlog_notice(_("Brightness: %.2f:%.2f"),
+	            options.scheme.day.brightness,
+	            options.scheme.night.brightness);
 
 	/* Gamma */
 	if (!gamma_is_valid(options.scheme.day.gamma) ||
 	    !gamma_is_valid(options.scheme.night.gamma)) {
-		fprintf(stderr,
-			_("Gamma value must be between %.1f and %.1f.\n"),
-			MIN_GAMMA, MAX_GAMMA);
+		vlog_err(_("Gamma value must be between %.1f and %.1f."),
+		         MIN_GAMMA, MAX_GAMMA);
 		exit(EXIT_FAILURE);
 	}
 
-	if (options.verbose) {
-		/* TRANSLATORS: The string in parenthesis is either
-		   Daytime or Night (translated). */
-		printf(_("Gamma (%s): %.3f, %.3f, %.3f\n"),
-		       _("Daytime"), options.scheme.day.gamma[0],
-		       options.scheme.day.gamma[1],
-		       options.scheme.day.gamma[2]);
-		printf(_("Gamma (%s): %.3f, %.3f, %.3f\n"),
-		       _("Night"), options.scheme.night.gamma[0],
-		       options.scheme.night.gamma[1],
-		       options.scheme.night.gamma[2]);
-	}
+	/* TRANSLATORS: The string in parenthesis is either
+	   Daytime or Night (translated). */
+	vlog_notice(_("Gamma (%s): %.3f, %.3f, %.3f"),
+	            _("Daytime"), options.scheme.day.gamma[0],
+	            options.scheme.day.gamma[1],
+	            options.scheme.day.gamma[2]);
+	vlog_notice(_("Gamma (%s): %.3f, %.3f, %.3f"),
+	            _("Night"), options.scheme.night.gamma[0],
+	            options.scheme.night.gamma[1],
+	            options.scheme.night.gamma[2]);
 
 	transition_scheme_t *scheme = &options.scheme;
 
@@ -1098,19 +1047,19 @@ main(int argc, char *argv[])
 				r = method_try_start(
 					m, &method_state, &config_state, NULL);
 				if (r < 0) {
-					fputs(_("Trying next method...\n"), stderr);
+					vlog_info(_("Trying next method..."));
 					continue;
 				}
 
 				/* Found method that works. */
-				printf(_("Using method `%s'.\n"), m->name);
+				vlog_info(_("Using method `%s'."), m->name);
 				options.method = m;
 				break;
 			}
 
 			/* Failure if no methods were successful at this point. */
 			if (options.method == NULL) {
-				fputs(_("No more methods to try.\n"), stderr);
+				vlog_err(_("No more methods to try."));
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -1124,19 +1073,18 @@ main(int argc, char *argv[])
 	{
 		location_t loc = { NAN, NAN };
 		if (need_location) {
-			fputs(_("Waiting for current location"
-				" to become available...\n"), stderr);
+			vlog_info(_("Waiting for current location to become available..."));
 
 			/* Wait for location provider. */
 			int r = provider_get_location(
 				options.provider, location_state, -1, &loc);
 			if (r < 0) {
-				fputs(_("Unable to get location"
-					" from provider.\n"), stderr);
+				vlog_err(_("Unable to get location from provider."));
 				exit(EXIT_FAILURE);
 			}
 
 			if (!location_is_valid(&loc)) {
+				vlog_err(_("Invalid location from provider."));
 				exit(EXIT_FAILURE);
 			}
 
@@ -1146,7 +1094,7 @@ main(int argc, char *argv[])
 		double now;
 		r = systemtime_get_time(&now);
 		if (r < 0) {
-			fputs(_("Unable to read system time.\n"), stderr);
+			vlog_err(_("Unable to read system time."));
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
 		}
@@ -1162,11 +1110,8 @@ main(int argc, char *argv[])
 			/* Current angular elevation of the sun */
 			double elevation = solar_elevation(
 				now, loc.lat, loc.lon);
-			if (options.verbose) {
-				/* TRANSLATORS: Append degree symbol if
-				   possible. */
-				printf(_("Solar elevation: %f\n"), elevation);
-			}
+			/* TRANSLATORS: Append degree symbol if possible. */
+			vlog_notice(_("Solar elevation: %f"), elevation);
 
 			period = get_period_from_elevation(scheme, elevation);
 			transition_prog =
@@ -1179,21 +1124,21 @@ main(int argc, char *argv[])
 		interpolate_transition_scheme(
 			scheme, transition_prog, &interp);
 
-		if (options.verbose || options.mode == PROGRAM_MODE_PRINT) {
-			print_period(period, transition_prog);
-			printf(_("Color temperature: %uK\n"),
-			       interp.temperature);
-			printf(_("Brightness: %.2f\n"),
-			       interp.brightness);
+		vlog_lvl_t saved_lvl = vlog_lvl_get();
+		if (options.mode == PROGRAM_MODE_PRINT) {
+			vlog_lvl_set(VLOG_LVL_NOTICE);
 		}
+		print_period(period, transition_prog);
+		vlog_notice("%s: %uK", _("Color temperature"), interp.temperature);
+		vlog_notice("%s: %.2f", _("Brightness"), interp.brightness);
+		vlog_lvl_set(saved_lvl);
 
 		if (options.mode != PROGRAM_MODE_PRINT) {
 			/* Adjust temperature */
 			r = options.method->set_temperature(
 				method_state, &interp, options.preserve_gamma);
 			if (r < 0) {
-				fputs(_("Temperature adjustment failed.\n"),
-				      stderr);
+				vlog_err(_("Temperature adjustment failed."));
 				options.method->free(method_state);
 				exit(EXIT_FAILURE);
 			}
@@ -1201,7 +1146,7 @@ main(int argc, char *argv[])
 			/* wlroots gamma adjustments automatically revert when
 			 * the process exits, so we wait until interrupt. */
 			if (strcmp(options.method->name, "wayland") == 0) {
-				fputs(_("Press ctrl-c to stop...\n"), stderr);
+				vlog_notice(_("Press ctrl-c to stop..."));
 				pause();
 			}
 		}
@@ -1209,10 +1154,7 @@ main(int argc, char *argv[])
 	break;
 	case PROGRAM_MODE_MANUAL:
 	{
-		if (options.verbose) {
-			printf(_("Color temperature: %uK\n"),
-			       options.temp_set);
-		}
+		vlog_notice(_("Color temperature: %uK"), options.temp_set);
 
 		/* Adjust temperature */
 		color_setting_t manual = scheme->day;
@@ -1220,7 +1162,7 @@ main(int argc, char *argv[])
 		r = options.method->set_temperature(
 			method_state, &manual, options.preserve_gamma);
 		if (r < 0) {
-			fputs(_("Temperature adjustment failed.\n"), stderr);
+			vlog_err(_("Temperature adjustment failed."));
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
 		}
@@ -1228,7 +1170,7 @@ main(int argc, char *argv[])
 		/* wlroots gamma adjustments automatically revert when
 		 * the process exits, so we wait until interrupt. */
 		if (strcmp(options.method->name, "wayland") == 0) {
-			fputs(_("Press ctrl-c to stop...\n"), stderr);
+			vlog_notice(_("Press ctrl-c to stop..."));
 			pause();
 		}
 	}
@@ -1241,7 +1183,7 @@ main(int argc, char *argv[])
 
 		r = options.method->set_temperature(method_state, &reset, 0);
 		if (r < 0) {
-			fputs(_("Temperature adjustment failed.\n"), stderr);
+			vlog_err(_("Temperature adjustment failed."));
 			options.method->free(method_state);
 			exit(EXIT_FAILURE);
 		}
@@ -1249,7 +1191,7 @@ main(int argc, char *argv[])
 		/* wlroots gamma adjustments automatically revert when
 		 * the process exits, so we wait until interrupt. */
 		if (strcmp(options.method->name, "wayland") == 0) {
-			fputs(_("Press ctrl-c to stop...\n"), stderr);
+			vlog_notice(_("Press ctrl-c to stop..."));
 			pause();
 		}
 	}
@@ -1259,8 +1201,7 @@ main(int argc, char *argv[])
 		r = run_continual_mode(
 			options.provider, location_state, scheme,
 			options.method, method_state,
-			options.use_fade, options.preserve_gamma,
-			options.verbose);
+			options.use_fade, options.preserve_gamma);
 		if (r < 0) exit(EXIT_FAILURE);
 	}
 	break;

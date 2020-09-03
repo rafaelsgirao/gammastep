@@ -13,6 +13,7 @@
 #include <errno.h>
 
 #include "location-manual.h"
+#include "vlog.h"
 
 #ifdef ENABLE_NLS
 # include <libintl.h>
@@ -45,7 +46,7 @@ location_manual_start(location_manual_state_t *state)
 {
 	/* Latitude and longitude must be set */
 	if (isnan(state->loc.lat) || isnan(state->loc.lon)) {
-		fputs(_("Latitude and longitude must be set.\n"), stderr);
+		vlog_err(_("Latitude and longitude must be set."));
 		exit(EXIT_FAILURE);
 	}
 
@@ -92,7 +93,7 @@ location_manual_set_option(location_manual_state_t *state, const char *key,
 	} else if (strcasecmp(key, "lon") == 0) {
 		state->loc.lon = v;
 	} else {
-		fprintf(stderr, _("Unknown method parameter: `%s'.\n"), key);
+		vlog_err("%s: '%s'.", _("Unknown method parameter"), key);
 		return -1;
 	}
 

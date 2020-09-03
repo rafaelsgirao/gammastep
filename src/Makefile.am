@@ -18,7 +18,8 @@ gammastep_SOURCES = \
 	redshift.c redshift.h \
 	signals.c signals.h \
 	solar.c solar.h \
-	systemtime.c systemtime.h
+	systemtime.c systemtime.h \
+	vlog.c vlog.h
 
 EXTRA_gammastep_SOURCES = \
 	gamma-drm.c gamma-drm.h \

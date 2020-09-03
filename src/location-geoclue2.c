@@ -16,6 +16,7 @@
 #include "location-geoclue2.h"
 #include "redshift.h"
 #include "pipeutils.h"
+#include "vlog.h"
 
 #ifdef ENABLE_NLS
 # include <libintl.h>
@@ -376,14 +377,14 @@ location_geoclue2_start(location_geoclue2_state_t *state)
 	state->longitude = 0;
 
 	if (!geoclue_available()) {
-		fputs(_("GeoClue2 provider is not installed!\n"), stderr);
+		vlog_err(_("GeoClue2 provider is not installed!"));
 		return -1;
 	}
 
 	int pipefds[2];
 	int r = pipeutils_create_nonblocking(pipefds);
 	if (r < 0) {
-		fputs(_("Failed to start GeoClue2 provider!\n"), stderr);
+		vlog_err(_("Failed to start GeoClue2 provider!"));
 		return -1;
 	}
 
@@ -427,7 +428,7 @@ static int
 location_geoclue2_set_option(location_geoclue2_state_t *state,
 			     const char *key, const char *value)
 {
-	fprintf(stderr, _("Unknown method parameter: `%s'.\n"), key);
+	vlog_err("%s: '%s'.", _("Unknown method parameter"), key);
 	return -1;
 }
 
