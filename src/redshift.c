@@ -658,10 +658,7 @@ run_continual_mode(const location_provider_t *provider,
 		if (disabled) {
 			vlog_debug("Currently disabled");
 			period = PERIOD_NONE;
-			if (should_reset) {
-				vlog_debug("Resetting in first disabled loop");
-				color_setting_reset(&target_interp);
-			}
+			color_setting_reset(&target_interp);
 		}
 
 		if (done) {
@@ -741,8 +738,11 @@ run_continual_mode(const location_provider_t *provider,
 		prev_period = period;
 		prev_target_interp = target_interp;
 
-		/* All resets have been done now */
-		should_reset = 0;
+		if (interp.temperature == target_interp.temperature &&
+		    interp.brightness == target_interp.brightness) {
+			/* All resets have been done now */
+			should_reset = 0;
+		}
 
 		/* Sleep length depends on whether a fade is ongoing. */
 		int delay = SLEEP_DURATION;
