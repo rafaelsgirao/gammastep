@@ -283,39 +283,23 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 		return ret;
 	}
 
-	int unsupported_outputs = 0;
-	vlog_debug(_("Evaluating %d wlroots outputs"), state->num_outputs);
 	for (int i = 0; i < state->num_outputs; ++i) {
 		struct output *output = &state->outputs[i];
-		if (output->gamma_size == 0) {
-			vlog_info(_("Discovered output that does not support gamma control"));
-			unsupported_outputs += 1;
-			continue;
-		} else {
-			vlog_debug(_("Discovered output that supports gamma control"));
-		}
 		if (!output->gamma_control) {
 			output->gamma_control = zwlr_gamma_control_manager_v1_get_gamma_control(state->gamma_control_manager, output->output);
 			zwlr_gamma_control_v1_add_listener(output->gamma_control, &gamma_control_listener, output);
 			roundtrip = 1;
 		}
 	}
-	if (state->num_outputs == unsupported_outputs) {
-		vlog_err(_("Zero outputs support gamma adjustment."));
-		exit(EXIT_FAILURE);
-	}
-	if (unsupported_outputs > 0) {
-		vlog_warning("%d/%d %s.", unsupported_outputs, state->num_outputs,
-		             _("output(s) do not support gamma adjustment"));
-	}
 	if (roundtrip) {
 		wl_display_roundtrip(state->display);
 	}
 
+	int unsupported_outputs = 0;
 	for (int i = 0; i < state->num_outputs; ++i) {
 		struct output *output = &state->outputs[i];
 		if (output->gamma_size == 0) {
-			// output does not support gamma control
+			unsupported_outputs += 1;
 			continue;
 		}
 		int size = output->gamma_size;
@@ -357,6 +341,15 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 
 		zwlr_gamma_control_v1_set_gamma(output->gamma_control, fd);
 		close(fd);
+	}
+
+	if (state->num_outputs == unsupported_outputs) {
+		vlog_err(_("Zero outputs support gamma adjustment."));
+		exit(EXIT_FAILURE);
+	}
+	if (unsupported_outputs > 0) {
+		vlog_warning("%d/%d %s.", unsupported_outputs, state->num_outputs,
+		             _("output(s) do not support gamma adjustment"));
 	}
 
 	state->callback = wl_display_sync(state->display);
