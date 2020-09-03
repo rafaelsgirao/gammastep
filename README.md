@@ -15,7 +15,14 @@ FAQ
 **How do I install?**
 
 Use the packages provided by your distribution, if available. Otherwise,
-please see _Building from source_ and _Latest builds from master branch_ below.
+please see _Building from source_ below.
+
+Distribution packaging status:
+
+* Arch Linux: currently in [the community repository](https://www.archlinux.org/packages/community/x86_64/gammastep/)
+* NixOS: Not packaged at this time, but there is [a pull request](https://github.com/NixOS/nixpkgs/pull/94565)
+* Void Linux: Not packaged at this time, but there is [a pull request](https://github.com/void-linux/void-packages/pull/23643)
+* Fedora: spec file in this repo, and also available from [this COPR repo](https://copr.fedorainfracloud.org/coprs/alebastr/sway-extras/)
 
 **How do I setup a configuration file?**
 
