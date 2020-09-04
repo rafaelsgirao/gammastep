@@ -383,7 +383,8 @@ parse_command_line_option(
 		options->provider = find_location_provider(
 			location_providers, provider_name);
 		if (options->provider == NULL) {
-			fprintf(stderr, _("Unknown location provider `%s'.\n"),
+			fprintf(stderr, "%s: '%s'\n",
+				_("Unknown location provider"),
 				provider_name);
 			return -1;
 		}
@@ -414,8 +415,8 @@ parse_command_line_option(
 		if (options->method == NULL) {
 			/* TRANSLATORS: This refers to the method
 			   used to adjust colors e.g VidMode */
-			fprintf(stderr, _("Unknown adjustment method `%s'.\n"),
-				value);
+			fprintf(stderr, "%s: '%s'\n",
+				_("Unknown adjustment method"), value);
 			return -1;
 		}
 
@@ -571,8 +572,8 @@ parse_config_file_option(
 			options->method = find_gamma_method(
 				gamma_methods, value);
 			if (options->method == NULL) {
-				fprintf(stderr, _("Unknown adjustment"
-						  " method `%s'.\n"), value);
+				fprintf(stderr, "%s: '%s'\n",
+					_("Unknown adjustment method"), value);
 				return -1;
 			}
 		}
@@ -581,8 +582,8 @@ parse_config_file_option(
 			options->provider = find_location_provider(
 				location_providers, value);
 			if (options->provider == NULL) {
-				fprintf(stderr, _("Unknown location"
-						  " provider `%s'.\n"), value);
+				fprintf(stderr, "%s: '%s'\n",
+					_("Unknown location provider"), value);
 				return -1;
 			}
 		}
@@ -591,8 +592,8 @@ parse_config_file_option(
 			int r = parse_transition_range(
 				value, &options->scheme.dawn);
 			if (r < 0) {
-				fprintf(stderr, _("Malformed dawn-time"
-						  " setting `%s'.\n"), value);
+				fprintf(stderr, "%s: '%s'\n",
+					_("Malformed dawn-time setting"), value);
 				return -1;
 			}
 		}
@@ -601,14 +602,14 @@ parse_config_file_option(
 			int r = parse_transition_range(
 				value, &options->scheme.dusk);
 			if (r < 0) {
-				fprintf(stderr, _("Malformed dusk-time"
-						  " setting `%s'.\n"), value);
+				fprintf(stderr, "%s: '%s'\n",
+					_("Malformed dusk-time setting"), value);
 				return -1;
 			}
 		}
 	} else {
-		fprintf(stderr, _("Unknown configuration setting `%s'.\n"),
-			key);
+		fprintf(stderr, "%s: '%s'\n",
+			_("Unknown configuration setting"), key);
 	}
 
 	return 0;

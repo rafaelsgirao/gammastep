@@ -215,7 +215,7 @@ wayland_free(wayland_state_t *state)
 		ret = wl_display_dispatch(state->display);
 	}
 	if (state->callback) {
-		vlog_err(_("Ignoring error on wayland connection while waiting to disconnect: %d"), ret);
+		vlog_err("%s: %d", _("Ignoring Wayland connection error while waiting to disconnect"), ret);
 		wl_callback_destroy(state->callback);
 	}
 
@@ -279,7 +279,7 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 		ret = wl_display_dispatch(state->display);
 	}
 	if (ret < 0) {
-		vlog_err(_("Wayland connection experienced a fatal error: %d"), ret);
+		vlog_err("%s: %d", _("Wayland connection experienced a fatal error"), ret);
 		return ret;
 	}
 
