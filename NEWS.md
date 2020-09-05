@@ -1,6 +1,13 @@
 News
 ====
 
+v2.0.2 (2020-09-05)
+-------------------
+- Update specfile
+- Overhaul logging implementation
+- Fix issue with enable/disable functionality
+- Fix issue with detection of unsupported Wayland outputs
+
 v2.0 (2020-07-18)
 -----------------
 - Rename from redshift to gammastep
