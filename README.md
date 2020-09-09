@@ -17,7 +17,7 @@ FAQ
 Use the packages provided by your distribution, if available. Otherwise,
 please see _Building from source_ below.
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/brillo.svg)](https://repology.org/project/brillo/versions)
+[![Packaging status](https://repology.org/badge/vertical-allrepos/gammastep.svg)](https://repology.org/project/gammastep/versions)
 
 In progress or unofficial packages:
 
