@@ -1068,8 +1068,12 @@ main(int argc, char *argv[])
 	config_ini_free(&config_state);
 
 	switch (options.mode) {
-	case PROGRAM_MODE_ONE_SHOT:
 	case PROGRAM_MODE_PRINT:
+		/* Increase logging level if necessary to print settings */
+		if (vlog_lvl_get() < VLOG_LVL_NOTICE)
+			vlog_lvl_set(VLOG_LVL_NOTICE);
+		/* FALLTHRU */
+	case PROGRAM_MODE_ONE_SHOT:
 	{
 		location_t loc = { NAN, NAN };
 		if (need_location) {
@@ -1123,14 +1127,9 @@ main(int argc, char *argv[])
 		interpolate_transition_scheme(
 			scheme, transition_prog, &interp);
 
-		vlog_lvl_t saved_lvl = vlog_lvl_get();
-		if (options.mode == PROGRAM_MODE_PRINT) {
-			vlog_lvl_set(VLOG_LVL_NOTICE);
-		}
 		print_period(period, transition_prog);
 		vlog_notice("%s: %uK", _("Color temperature"), interp.temperature);
 		vlog_notice("%s: %.2f", _("Brightness"), interp.brightness);
-		vlog_lvl_set(saved_lvl);
 
 		if (options.mode != PROGRAM_MODE_PRINT) {
 			/* Adjust temperature */
