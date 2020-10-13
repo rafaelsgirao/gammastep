@@ -183,9 +183,11 @@ wayland_start(wayland_state_t *state)
 
 	wl_display_roundtrip(state->display);
 	if (!state->gamma_control_manager) {
+		vlog_err(_("Could not control gamma, exiting."));
 		return -1;
 	}
 	if (state->num_outputs > 0 && !state->outputs) {
+		vlog_err(_("No outputs available, exiting."));
 		return -1;
 	}
 
