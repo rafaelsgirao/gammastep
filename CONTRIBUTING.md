@@ -21,7 +21,7 @@ the location can be set to `no` to disable the systemd files.
 Example:
 
 ``` shell
-$ ./configure --prefix=$HOME/redshift/root \
+$ ./configure --prefix=$HOME/opt/gammastep \
    --with-systemduserunitdir=$HOME/.config/systemd/user
 ```
 
@@ -31,7 +31,7 @@ Now, build the files:
 $ make
 ```
 
-The main redshift program can be run at this point. To install to the
+The main gammastep program can be run at this point. To install to the
 prefix directory run:
 
 ``` shell
@@ -41,7 +41,7 @@ $ make install
 You can now run the python script. Example:
 
 ``` shell
-$ $HOME/redshift/root/bin/redshift-gtk
+$ $HOME/opt/gammastep/bin/gammastep-indicator
 ```
 
 
@@ -123,10 +123,8 @@ the `master` branch as `develop`.
 Contributing translations
 -------------------------
 
-You can contribute translations directly at
-[Launchpad Translations for Redshift](https://translations.launchpad.net/redshift).
-Updated translations will be pulled back into the `po` files on Github
-before a release is made.
+At this time, translations must occur directly in this repo.
+Contributions to integrate with an external translating service are welcome.
 
 
 Creating a new release
@@ -155,26 +153,7 @@ Build Fedora RPMs
 Run `make dist-xz` and copy the `.tar.xz` file to `~/rpmbuild/SOURCES`. Then run
 
 ``` shell
-$ rpmbuild -ba contrib/redshift.spec
+$ rpmbuild -ba contrib/gammastep.spec
 ```
 
 If successful this will place RPMs in `~/rpmbuild/RPMS`.
-
-
-Cross-compile for Windows
--------------------------
-
-Install MinGW and run `configure` using the following command line. Use
-`i686-w64-mingw32` as host for 32-bit builds.
-
-``` shell
-$ ./configure --disable-drm --disable-randr --disable-vidmode --enable-wingdi \
-  --disable-quartz --disable-geoclue2 --disable-corelocation --disable-gui \
-  --disable-ubuntu --host=x86_64-w64-mingw32
-```
-
-
-Notes
------
-* verbose flag is (currently) only held in redshift.c; thus, write all
-  verbose messages there.
