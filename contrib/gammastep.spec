@@ -1,5 +1,5 @@
 Name:           gammastep
-Version:        2.0.2
+Version:        2.0.3
 # 0.x will be changed to 1 when the package gets accepted into Fedora
 Release:        0.1%{?dist}
 Summary:        Adjusts the color temperature of your screen according to time of day

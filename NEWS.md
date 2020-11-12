@@ -1,6 +1,13 @@
 News
 ====
 
+v2.0.3 (2020-11-11)
+-------------------
+- Fix indicator for new logging methodology
+- Fix logging in print mode
+- Add more error logging for wl method
+- Update README and CONTRIBUTING docs
+
 v2.0.2 (2020-09-05)
 -------------------
 - Update specfile
