@@ -178,18 +178,19 @@ class RedshiftController(GObject.GObject):
                 self._location = new_location
                 self.emit('location-changed', *new_location)
 
-    def _child_stdout_line_cb(self, line):
+    def _child_stderr_line_cb(self, line):
         """Called when the child process outputs a line to stdout."""
         if line:
-            m = re.match(r'([\w ]+): (.+)', line)
+            m = re.match(r'([\w ]+): ([\w ]+): (.+)', line)
             if m:
-                key = m.group(1)
-                value = m.group(2)
+                # _priority = m.group(1)
+                key = m.group(2)
+                value = m.group(3)
                 self._child_key_change_cb(key, value)
 
     def _child_data_cb(self, f, cond, data):
         """Called when the child process has new data on stdout/stderr."""
-        stdout, ib = data
+        is_stdout, ib = data
         ib.buf += os.read(f, 256).decode('utf-8')
 
         # Split input at line break
@@ -198,10 +199,9 @@ class RedshiftController(GObject.GObject):
             if sep == '':
                 break
             ib.buf = last
-            if stdout:
-                self._child_stdout_line_cb(first)
-            else:
+            if not is_stdout:
                 self._errors += first + '\n'
+                self._child_stderr_line_cb(first)
 
         return True
 
