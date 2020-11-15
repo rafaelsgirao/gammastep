@@ -1,6 +1,10 @@
 News
 ====
 
+v2.0.5 (2020-11-14)
+-------------------
+- Undo AppData updates from version 2.0.4
+
 v2.0.4 (2020-11-14)
 -------------------
 - Update AppData metadata for modern practices
