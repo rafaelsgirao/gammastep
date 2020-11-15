@@ -1,6 +1,11 @@
 News
 ====
 
+v2.0.4 (2020-11-14)
+-------------------
+- Update AppData metadata for modern practices
+- Add keywords to desktop file
+
 v2.0.3 (2020-11-11)
 -------------------
 - Fix indicator for new logging methodology
