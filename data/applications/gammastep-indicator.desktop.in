@@ -3,6 +3,7 @@ Version=1.0
 _Name=Gammastep Indicator
 _GenericName=Indicator for color temperature adjustment
 _Comment=Indicator for color temperature adjustment
+_Keywords=display;color;soft;hue;temperature;eyes;strain;
 Exec=gammastep-indicator
 Icon=gammastep
 Terminal=false
