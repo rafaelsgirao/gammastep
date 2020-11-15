@@ -80,7 +80,7 @@ $(systemduserunit_DATA): $(SYSTEMD_USER_UNIT_IN_FILES) Makefile
 
 # Appdata file
 if ENABLE_GUI
-appdatadir = @datadir@/metadata
+appdatadir = @datadir@/appdata
 appdata_DATA = $(APPDATA_IN_FILES:.xml.in=.xml)
 
 # We would preferable use @INTLTOOL_XML_RULE@ here but
