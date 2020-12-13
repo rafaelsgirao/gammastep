@@ -1,6 +1,13 @@
 News
 ====
 
+v2.0.6 (2020-11-14)
+-------------------
+- Update AppData metadata for modern practices (again)
+- Update pt\_BR translations (thanks @ericonr)
+- Add wayland abstraction to AppArmor profile
+- Use AyatanaAppIndicator library when available
+
 v2.0.5 (2020-11-14)
 -------------------
 - Undo AppData updates from version 2.0.4
