@@ -1,7 +1,7 @@
 News
 ====
 
-v2.0.6 (2020-11-14)
+v2.0.6 (2020-12-12)
 -------------------
 - Update AppData metadata for modern practices (again)
 - Update pt\_BR translations (thanks @ericonr)
