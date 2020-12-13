@@ -8,6 +8,7 @@ profile com.gitlab.chinstap.gammastep @bindir@/gammastep {
   #include <abstractions/nameservice>
   #include <abstractions/dbus-strict>
   #include <abstractions/X>
+  #include <abstractions/wayland>
 
   dbus send
        bus=system
