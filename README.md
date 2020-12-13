@@ -19,11 +19,6 @@ please see _Building from source_ below.
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gammastep.svg)](https://repology.org/project/gammastep/versions)
 
-In progress or unofficial packages:
-
-* Void Linux: Not packaged at this time, but there is [a pull request](https://github.com/void-linux/void-packages/pull/23643)
-* Fedora: spec file in this repo, and also available from [this COPR repo](https://copr.fedorainfracloud.org/coprs/alebastr/sway-extras/)
-
 **How do I setup a configuration file?**
 
 A configuration file is not required but is useful for saving custom
