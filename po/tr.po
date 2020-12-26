@@ -2,14 +2,15 @@
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the redshift package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# Oğuz Ersen <oguzersen@protonmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: redshift\n"
 "Report-Msgid-Bugs-To: https://github.com/jonls/redshift/issues\n"
 "POT-Creation-Date: 2020-09-04 12:22-0700\n"
-"PO-Revision-Date: 2016-09-13 22:18+0000\n"
-"Last-Translator: Butterfly <Unknown>\n"
+"PO-Revision-Date: 2021-01-01 00:00+0300\n"
+"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +25,8 @@ msgid ""
 "This may help your eyes hurt less if you are working in front of the screen "
 "at night."
 msgstr ""
+"Ekranınızın renk sıcaklığını çevrenize göre ayarlar. Bu, geceleri ekranın "
+"önünde çalışıyorsanız gözlerinizin daha az ağrımasına yardımcı olabilir. "
 
 #: ../data/appdata/gammastep-indicator.appdata.xml.in.h:2
 msgid ""
@@ -32,16 +35,22 @@ msgid ""
 "and early morning, the color temperature transitions smoothly from night to "
 "daytime temperature to allow your eyes to slowly adapt."
 msgstr ""
+"Renk sıcaklığı güneşin konumuna göre ayarlanır. Gece ve gündüz farklı bir "
+"renk sıcaklığı ayarlanır. Alacakaranlıkta ve sabahın erken saatlerinde, "
+"gözlerinizin yavaşça uyum sağlamasına izin vermek için renk sıcaklığı gece "
+"sıcaklığından gündüz sıcaklığına yumuşak bir şekilde geçiş yapar."
 
 #: ../data/appdata/gammastep-indicator.appdata.xml.in.h:3
 msgid ""
 "This program provides a status icon that allows the user to control color "
 "temperature."
 msgstr ""
+"Bu program, kullanıcının renk sıcaklığını denetlemesini sağlayan bir durum "
+"simgesi sağlar."
 
 #: ../data/applications/gammastep.desktop.in.h:1
 msgid "gammastep"
-msgstr ""
+msgstr "gammastep"
 
 #: ../data/applications/gammastep.desktop.in.h:2
 msgid "Color temperature adjustment"
@@ -53,12 +62,12 @@ msgstr "Renk sıcaklığı ayarlama aracı"
 
 #: ../data/applications/gammastep-indicator.desktop.in.h:1
 msgid "Gammastep Indicator"
-msgstr ""
+msgstr "Gammastep Göstergesi"
 
 #: ../data/applications/gammastep-indicator.desktop.in.h:2
 #, fuzzy
 msgid "Indicator for color temperature adjustment"
-msgstr "Renk sıcaklığı ayarı"
+msgstr "Renk sıcaklığı ayarı için gösterge"
 
 #. TRANSLATORS: Name printed when period of day is unknown
 #: ../src/redshift.c:92
@@ -76,7 +85,7 @@ msgstr "Gece"
 
 #: ../src/redshift.c:95
 msgid "Transition"
-msgstr "Dönüşüm"
+msgstr "Geçiş"
 
 #: ../src/redshift.c:178 ../src/gammastep_indicator/statusicon.py:313
 #: ../src/gammastep_indicator/statusicon.py:326
@@ -85,7 +94,6 @@ msgstr "Dönem"
 
 #: ../src/redshift.c:188 ../src/redshift.c:958 ../src/redshift.c:965
 #: ../src/redshift.c:1018
-#, fuzzy
 msgid "Day"
 msgstr "Gündüz"
 
@@ -115,63 +123,63 @@ msgstr "Konum"
 
 #: ../src/redshift.c:280
 msgid "Failed to initialize provider"
-msgstr ""
+msgstr "Sağlayıcı başlatılamadı"
 
 #: ../src/redshift.c:294 ../src/redshift.c:334 ../src/redshift.c:378
 #: ../src/redshift.c:404
 msgid "Failed to set option"
-msgstr ""
+msgstr "Seçenek ayarlanamadı"
 
 #: ../src/redshift.c:297 ../src/redshift.c:336
 msgid "For more information, use option:"
-msgstr ""
+msgstr "Daha fazla bilgi için şu seçeneği kullanın:"
 
 #: ../src/redshift.c:324 ../src/redshift.c:395
 msgid "Failed to parse option"
-msgstr ""
+msgstr "Seçenek ayrıştırılamadı"
 
 #: ../src/redshift.c:349
 msgid "Failed to start provider"
-msgstr ""
+msgstr "Sağlayıcı başlatılamadı"
 
 #: ../src/redshift.c:364
 msgid "Failed to initialize method"
-msgstr ""
+msgstr "Yöntem başlatılamadı"
 
 #: ../src/redshift.c:379 ../src/redshift.c:405
 msgid "For more information, try:"
-msgstr ""
+msgstr "Daha fazla bilgi için şunu deneyin:"
 
 #: ../src/redshift.c:417
 #, fuzzy
 msgid "Failed to start adjustment method"
-msgstr "Renk sıcaklığı ayarlama aracı"
+msgstr "Ayarlama yöntemi başlatılamadı"
 
 #: ../src/redshift.c:445
 msgid "Latitude must be in range"
-msgstr ""
+msgstr "Enlem aralık içinde olmalıdır:"
 
 #: ../src/redshift.c:452
 msgid "Longitude must be in range:"
-msgstr ""
+msgstr "Boylam aralık içinde olmalıdır:"
 
 #: ../src/redshift.c:479 ../src/redshift.c:497 ../src/redshift.c:624
 #: ../src/redshift.c:1096
 msgid "Unable to read system time."
-msgstr ""
+msgstr "Sistem zamanı okunamıyor."
 
 #: ../src/redshift.c:567
 msgid "Waiting for initial location to become available..."
-msgstr ""
+msgstr "İlk konumun kullanılabilir olması bekleniyor..."
 
 #: ../src/redshift.c:572 ../src/redshift.c:763 ../src/redshift.c:777
 #: ../src/redshift.c:1081
 msgid "Unable to get location from provider."
-msgstr ""
+msgstr "Sağlayıcıdan konum alınamıyor."
 
 #: ../src/redshift.c:577 ../src/redshift.c:800
 msgid "Invalid location returned from provider."
-msgstr ""
+msgstr "Sağlayıcıdan geçersiz konum alındı."
 
 #: ../src/redshift.c:584 ../src/redshift.c:715 ../src/redshift.c:1130
 #: ../src/redshift.c:1155 ../src/gammastep_indicator/statusicon.py:307
@@ -181,18 +189,16 @@ msgstr "Renk sıcaklığı"
 
 #: ../src/redshift.c:585 ../src/redshift.c:718 ../src/redshift.c:1003
 #: ../src/redshift.c:1131
-#, fuzzy
 msgid "Brightness"
-msgstr "Parlaklık: %.2f\n"
+msgstr "Parlaklık"
 
 #: ../src/redshift.c:614
-#, fuzzy
 msgid "Status"
-msgstr "Durum: %s\n"
+msgstr "Durum"
 
 #: ../src/redshift.c:614 ../src/gammastep_indicator/statusicon.py:302
 msgid "Disabled"
-msgstr "Pasif"
+msgstr "Devre dışı"
 
 #: ../src/redshift.c:614 ../src/gammastep_indicator/statusicon.py:61
 #: ../src/gammastep_indicator/statusicon.py:302
@@ -201,100 +207,98 @@ msgstr "Etkin"
 
 #: ../src/redshift.c:727 ../src/redshift.c:1139 ../src/redshift.c:1163
 #: ../src/redshift.c:1184
-#, fuzzy
 msgid "Temperature adjustment failed."
-msgstr "Renk sıcaklığı ayarlama aracı"
+msgstr "Sıcaklık ayarlama başarısız oldu."
 
 #: ../src/redshift.c:783
 msgid ""
 "Location is temporarily unavailable; Using previous location until it "
 "becomes available..."
 msgstr ""
+"Konum geçici olarak kullanılamıyor; Kullanılabilir hale gelene kadar önceki "
+"konum kullanılıyor..."
 
 #: ../src/redshift.c:890
 msgid "Partial time-configuration unsupported!"
-msgstr ""
+msgstr "Kısmi zaman yapılandırma desteklenmiyor!"
 
 #: ../src/redshift.c:897
 msgid "Invalid dawn/dusk time configuration!"
-msgstr ""
+msgstr "Geçersiz şafak/alacakaranlık zamanı yapılandırması!"
 
 #: ../src/redshift.c:926
 msgid "Trying location provider"
-msgstr ""
+msgstr "Konum sağlayıcı deneniyor"
 
 #: ../src/redshift.c:931
 msgid "Trying next provider..."
-msgstr ""
+msgstr "Sonraki sağlayıcı deneniyor..."
 
 #: ../src/redshift.c:936
-#, fuzzy
 msgid "Using provider:"
-msgstr "Kullanılan yöntem `%s'.\n"
+msgstr "Kullanılan sağlayıcı:"
 
 #: ../src/redshift.c:944
 msgid "No more location providers to try."
-msgstr ""
+msgstr "Denenecek başka konum sağlayıcı yok."
 
 #: ../src/redshift.c:952
 msgid ""
 "High transition elevation cannot be lower than the low transition elevation."
 msgstr ""
+"Yüksek geçiş yüksekliği, alçak geçiş yüksekliğinden daha düşük olamaz."
 
 #: ../src/redshift.c:958
 msgid "Solar elevations"
-msgstr ""
+msgstr "Güneş yükseklikleri"
 
 #: ../src/redshift.c:965
-#, fuzzy
 msgid "Temperatures"
-msgstr "Renk sıcaklığı"
+msgstr "Sıcaklıklar"
 
 #: ../src/redshift.c:975 ../src/redshift.c:986
-#, fuzzy
 msgid "Temperature must be in range"
-msgstr "Renk sıcaklığı ayarlama aracı"
+msgstr "Sıcaklık aralık içinde olmalıdır"
 
 #: ../src/redshift.c:997
 msgid "Brightness must be in range"
-msgstr ""
+msgstr "Parlaklık aralık içinde olmalıdır"
 
 #: ../src/redshift.c:1010
 msgid "Gamma value must be in range"
-msgstr ""
+msgstr "Gama değeri aralık içinde olmalıdır"
 
 #: ../src/redshift.c:1018 ../src/redshift.c:1022
 msgid "Gamma"
-msgstr ""
+msgstr "Gama"
 
 #: ../src/redshift.c:1049
 msgid "Trying next method..."
-msgstr ""
+msgstr "Sonraki yöntem deneniyor..."
 
 #: ../src/redshift.c:1054
-#, fuzzy
 msgid "Using method"
-msgstr "Kullanılan yöntem `%s'.\n"
+msgstr "Kullanılan yöntem:"
 
 #: ../src/redshift.c:1061
 msgid "No more methods to try."
-msgstr ""
+msgstr "Denenecek başka yöntem yok."
 
 #: ../src/redshift.c:1075
 msgid "Waiting for current location to become available..."
-msgstr ""
+msgstr "Geçerli konumun kullanılabilir olması bekleniyor..."
 
 #: ../src/redshift.c:1086
 msgid "Invalid location from provider."
-msgstr ""
+msgstr "Sağlayıcıdan geçersiz konum."
 
 #: ../src/redshift.c:1112
 msgid "Solar elevation"
-msgstr ""
+msgstr "Güneş yüksekliği"
 
 #: ../src/redshift.c:1147 ../src/redshift.c:1171 ../src/redshift.c:1192
 msgid "Press ctrl-c to stop..."
-msgstr ""
+msgstr "Durdurmak için ctrl-c tuşlarına basın..."
 
 #. TRANSLATORS: help output 1
 #. LAT is latitude, LON is longitude,
@@ -304,13 +308,13 @@ msgstr ""
 #: ../src/options.c:144
 #, c-format
 msgid "Usage: %s -l LAT:LON -t DAY:NIGHT [OPTIONS...]\n"
-msgstr "Kullanımı: %s -l LAT:LON -t DAY:NIGHT [OPTIONS...]\n"
+msgstr "Kullanım: %s -l ENL:BOY -t GÜN:GECE [SEÇENEKLER...]\n"
 
 #. TRANSLATORS: help output 2
 #. no-wrap
 #: ../src/options.c:150
 msgid "Set color temperature of display according to time of day.\n"
-msgstr "Günün saatine göre renk sicaklığını ayarla.\n"
+msgstr "Günün saatine göre ekranın renk sıcaklığını ayarla.\n"
 
 #. TRANSLATORS: help output 3
 #. no-wrap
@@ -321,6 +325,10 @@ msgid ""
 "  -q\t\tDecrease logging verbosity\n"
 "  -V\t\tShow program version\n"
 msgstr ""
+"  -h\t\tBu yardım mesajını görüntüle\n"
+"  -v\t\tGünlük kaydı ayrıntısını arttır\n"
+"  -q\t\tGünlük kaydı ayrıntısını azalt\n"
+"  -V\t\tProgramın sürümünü göster\n"
 
 #. TRANSLATORS: help output 4
 #. `list' must not be translated
@@ -343,6 +351,21 @@ msgid ""
 "  -r\t\tDisable fading between color temperatures\n"
 "  -t DAY:NIGHT\tColor temperature to set at daytime/night\n"
 msgstr ""
+"  -b GÜN:GECE\tUygulanacak ekran parlaklığı (0.1 ve 1.0 arasında)\n"
+"  -c DOSYA\tAyarları belirtilen yapılandırma dosyasından yükle\n"
+"  -g R:G:B\tUygulanacak ek gama düzeltmesi\n"
+"  -l ENL:BOY\tGeçerli konumunuz\n"
+"  -l SAĞLAYICI\tOtomatik konum güncellemeleri için sağlayıcıyı seç\n"
+"  \t\t(Kullanılabilir sağlayıcıları görmek için `list' yazın)\n"
+"  -m YÖNTEM\tRenk sıcaklığını ayarlamak için kullanılacak yöntem\n"
+"  \t\t(Kullanılabilir yöntemleri görmek için `list' yazın)\n"
+"  -o\t\tBir defa modu (renk sıcaklığını sürekli olarak ayarlama)\n"
+"  -O SICAKLIK\tElle bir defa modu (renk sıcaklığını ayarla)\n"
+"  -p\t\tModu yazdır (yalnızca parametreleri yazdır ve çık)\n"
+"  -P\t\tYeni renk efekti uygulamadan önce mevcut gama ölçeklerini sıfırla\n"
+"  -x\t\tModu sıfırla (ayarı ekrandan kaldır)\n"
+"  -r\t\tRenk sıcaklıkları arasında geçişi devre dışı bırak\n"
+"  -t GÜN:GECE\tGündüz/gece ayarlanacak renk sıcaklığı\n"
 
 #. TRANSLATORS: help output 5
 #: ../src/options.c:187
@@ -354,6 +377,12 @@ msgid ""
 "in\n"
 "more red light.\n"
 msgstr ""
+"Normal sıcaklık %uK'dir. Bu değerin kullanılması ekranın renk sıcaklığını\n"
+"değiştirmeyecektir. Renk sıcaklığının bundan daha yüksek bir değere "
+"ayarlanması\n"
+"daha fazla mavi ışığa, ve daha düşük bir değere ayarlanması daha fazla "
+"kırmızı\n"
+"ışığa neden olacaktır.\n"
 
 #. TRANSLATORS: help output 6
 #: ../src/options.c:196
@@ -364,118 +393,124 @@ msgid ""
 "  Daytime temperature: %uK\n"
 "  Night temperature: %uK\n"
 msgstr ""
+"Öntanımlı değerler:\n"
+"\n"
+"  Gündüz sıcaklığı: %uK\n"
+"  Gece sıcaklığı: %uK\n"
 
 #. TRANSLATORS: help output 7
 #: ../src/options.c:204
 #, c-format
 msgid "Please report bugs to <%s>\n"
-msgstr ""
+msgstr "Hataları lütfen şuraya bildirin: <%s>\n"
 
 #: ../src/options.c:211
 msgid "Available adjustment methods:\n"
-msgstr ""
+msgstr "Kullanılabilir ayarlama yöntemleri:\n"
 
 #: ../src/options.c:217
 msgid "Specify colon-separated options with `-m METHOD:OPTIONS'.\n"
 msgstr ""
+"İki nokta üst üsteyle ayrılmış seçenekleri `-m YÖNTEM:SEÇENEKLER' ile "
+"belirtin.\n"
 
 #. TRANSLATORS: `help' must not be translated.
 #: ../src/options.c:220
 msgid "Try `-m METHOD:help' for help.\n"
-msgstr ""
+msgstr "Yardım için `-m YÖNTEM:help' kullanın.\n"
 
 #: ../src/options.c:227
 msgid "Available location providers:\n"
-msgstr ""
+msgstr "Kullanılabilir konum sağlayıcıları:\n"
 
 #: ../src/options.c:233
 msgid "Specify colon-separated options with`-l PROVIDER:OPTIONS'.\n"
+"İki nokta üst üsteyle ayrılmış seçenekleri `-l SAĞLAYICI:SEÇENEKLER' ile "
+"belirtin.\n"
 msgstr ""
 
 #. TRANSLATORS: `help' must not be translated.
 #: ../src/options.c:236
 msgid "Try `-l PROVIDER:help' for help.\n"
-msgstr ""
+msgstr "Yardım için `-l SAĞLAYICI:help' kullanın.\n"
 
 #: ../src/options.c:337
 msgid "Malformed gamma argument.\n"
-msgstr ""
+msgstr "Hatalı gama argümanı.\n"
 
 #: ../src/options.c:338 ../src/options.c:450 ../src/options.c:473
 msgid "Try `-h' for more information.\n"
-msgstr ""
+msgstr "Daha fazla bilgi için `-h' kullanın.\n"
 
 #: ../src/options.c:387 ../src/options.c:586
-#, fuzzy
 msgid "Unknown location provider"
-msgstr "Kullanılan yöntem `%s'.\n"
+msgstr "Bilinmeyen konum sağlayıcı"
 
 #: ../src/options.c:419 ../src/options.c:576
-#, fuzzy
 msgid "Unknown adjustment method"
-msgstr "Renk sıcaklığı ayarlama aracı"
+msgstr "Bilinmeyen ayarlama yöntemi"
 
 #: ../src/options.c:449
 msgid "Malformed temperature argument.\n"
-msgstr ""
+msgstr "Hatalı sıcaklık argümanı.\n"
 
 #: ../src/options.c:545 ../src/options.c:557 ../src/options.c:566
 msgid "Malformed gamma setting.\n"
-msgstr ""
+msgstr "Hatalı gama ayarı.\n"
 
 #: ../src/options.c:596
 msgid "Malformed dawn-time setting"
-msgstr ""
+msgstr "Hatalı şafak zamanı ayarı"
 
 #: ../src/options.c:606
 msgid "Malformed dusk-time setting"
-msgstr ""
+msgstr "Hatalı alacakaranlık zamanı ayarı"
 
 #: ../src/options.c:612
 msgid "Unknown configuration setting"
-msgstr ""
+msgstr "Bilinmeyen yapılandırma ayarı"
 
 #: ../src/config-ini.c:143
 msgid "Malformed section header in config file.\n"
-msgstr ""
+msgstr "Yapılandırma dosyasında hatalı bölüm başlığı.\n"
 
 #: ../src/config-ini.c:179
 msgid "Malformed assignment in config file.\n"
-msgstr ""
+msgstr "Yapılandırma dosyasında hatalı atama.\n"
 
 #: ../src/config-ini.c:190
 msgid "Assignment outside section in config file.\n"
-msgstr ""
+msgstr "Yapılandırma dosyasında bölüm dışında atama.\n"
 
 #: ../src/gamma-drm.c:86
 #, c-format
 msgid "Failed to open DRM device: %s\n"
-msgstr ""
+msgstr "DRM aygıtı açılamadı: %s\n"
 
 #: ../src/gamma-drm.c:94
 #, c-format
 msgid "Failed to get DRM mode resources\n"
-msgstr ""
+msgstr "DRM modu kaynakları alınamadı\n"
 
 #: ../src/gamma-drm.c:104 ../src/gamma-randr.c:373
 #, c-format
 msgid "CRTC %d does not exist. "
-msgstr ""
+msgstr "CRTC %d mevcut değil. "
 
 #: ../src/gamma-drm.c:107 ../src/gamma-randr.c:376
 #, c-format
 msgid "Valid CRTCs are [0-%d].\n"
-msgstr ""
+msgstr "Geçerli CRTC'ler: [0-%d].\n"
 
 #: ../src/gamma-drm.c:110 ../src/gamma-randr.c:379
 #, c-format
 msgid "Only CRTC 0 exists.\n"
-msgstr ""
+msgstr "Yalnızca CRTC 0 var.\n"
 
 #: ../src/gamma-drm.c:148
 #, c-format
 msgid "CRTC %i lost, skipping\n"
-msgstr ""
+msgstr "CRTC %i kayıp, atlanıyor\n"
 
 #: ../src/gamma-drm.c:154
 #, c-format
@@ -483,6 +518,8 @@ msgid ""
 "Could not get gamma ramp size for CRTC %i\n"
 "on graphics card %i, ignoring device.\n"
 msgstr ""
+"CRTC %i için %i grafik kartında gama ölçeklendirme\n"
+"boyutu alınamadı, aygıt yok sayılıyor.\n"
 
 #: ../src/gamma-drm.c:167
 #, c-format
@@ -490,10 +527,12 @@ msgid ""
 "DRM could not read gamma ramps on CRTC %i on\n"
 "graphics card %i, ignoring device.\n"
 msgstr ""
+"DRM, CRTC %i üzerinde %i grafik kartında gama\n"
+"ölçeklerini okuyamadı, aygıt yok sayılıyor.\n"
 
 #: ../src/gamma-drm.c:231
 msgid "Adjust gamma ramps with Direct Rendering Manager.\n"
-msgstr ""
+msgstr "Direct Rendering Manager ile gama ölçeklerini ayarla.\n"
 
 #. TRANSLATORS: DRM help output
 #. left column must not be translated
@@ -502,83 +541,85 @@ msgid ""
 "  card=N\tGraphics card to apply adjustments to\n"
 "  crtc=N\tCRTC to apply adjustments to\n"
 msgstr ""
+"  card=N\tAyarların uygulanacağı grafik kartı\n"
+"  crtc=N\tAyarların uygulanacağı CRTC\n"
 
 #: ../src/gamma-drm.c:249
 #, c-format
 msgid "CRTC must be a non-negative integer\n"
-msgstr ""
+msgstr "CRTC negatif olmayan bir tam sayı olmalıdır\n"
 
 #: ../src/gamma-drm.c:253 ../src/gamma-randr.c:358 ../src/gamma-vidmode.c:150
 #: ../src/gamma-dummy.c:56
 #, c-format
 msgid "Unknown method parameter: `%s'.\n"
-msgstr ""
+msgstr "Bilinmeyen yöntem parametresi: `%s'.\n"
 
 #: ../src/gamma-wl.c:70
 msgid "Not authorized to bind the wlroots gamma control manager interface."
-msgstr ""
+msgstr "wlroots gama denetim yöneticisi arayüzüne bağlama yetkisi yok."
 
 #: ../src/gamma-wl.c:90
 msgid "Failed to allocate memory"
-msgstr ""
+msgstr "Bellek ayrılamadı"
 
 #: ../src/gamma-wl.c:124
 msgid "The zwlr_gamma_control_manager_v1 was removed"
-msgstr ""
+msgstr "zwlr_gamma_control_manager_v1 kaldırıldı"
 
 #: ../src/gamma-wl.c:177
 msgid "Could not connect to wayland display, exiting."
-msgstr ""
+msgstr "Wayland ekranına bağlanılamadı, çıkılıyor."
 
 #: ../src/gamma-wl.c:218
 msgid "Ignoring Wayland connection error while waiting to disconnect"
-msgstr ""
+msgstr "Bağlantı kesilmesi beklenirken Wayland bağlantı hatası yok sayılıyor"
 
 #: ../src/gamma-wl.c:247
 msgid "Adjust gamma ramps with a Wayland compositor.\n"
-msgstr ""
+msgstr "Gama ölçeklerini bir Wayland birleştiricisiyle ayarla.\n"
 
 #: ../src/gamma-wl.c:282
 msgid "Wayland connection experienced a fatal error"
-msgstr ""
+msgstr "Wayland bağlantısı ölümcül bir hatayla karşılaştı"
 
 #: ../src/gamma-wl.c:347
 msgid "Zero outputs support gamma adjustment."
-msgstr ""
+msgstr "Hiçbir çıkış gama ayarını desteklemiyor."
 
 #: ../src/gamma-wl.c:352
 msgid "output(s) do not support gamma adjustment"
-msgstr ""
+msgstr "çıkış gama ayarını desteklemiyor"
 
 #: ../src/gamma-randr.c:83 ../src/gamma-randr.c:142 ../src/gamma-randr.c:181
 #: ../src/gamma-randr.c:207 ../src/gamma-randr.c:264 ../src/gamma-randr.c:424
 #, c-format
 msgid "`%s' returned error %d\n"
-msgstr ""
+msgstr "`%s' %d hata kodunu döndürdü\n"
 
 #: ../src/gamma-randr.c:92
 #, c-format
 msgid "Unsupported RANDR version (%u.%u)\n"
-msgstr ""
+msgstr "Desteklenmeyen RANDR sürümü (%u.%u)\n"
 
 #: ../src/gamma-randr.c:127
 #, c-format
 msgid "Screen %i could not be found.\n"
-msgstr ""
+msgstr "Ekran %i bulunamadı.\n"
 
 #: ../src/gamma-randr.c:193 ../src/gamma-vidmode.c:85
 #, c-format
 msgid "Gamma ramp size too small: %i\n"
-msgstr ""
+msgstr "Gama ölçek boyutu çok küçük: %i\n"
 
 #: ../src/gamma-randr.c:266
 #, c-format
 msgid "Unable to restore CRTC %i\n"
-msgstr ""
+msgstr "CRTC %i geri yüklenemiyor\n"
 
 #: ../src/gamma-randr.c:290
 msgid "Adjust gamma ramps with the X RANDR extension.\n"
-msgstr ""
+msgstr "Gama ölçeklerini X RANDR eklentisi ile ayarla.\n"
 
 #. TRANSLATORS: RANDR help output
 #. left column must not be translated
@@ -587,11 +628,13 @@ msgid ""
 "  screen=N\t\tX screen to apply adjustments to\n"
 "  crtc=N\tList of comma separated CRTCs to apply adjustments to\n"
 msgstr ""
+"  screen=N\t\tAyarların uygulanacağı X ekranı\n"
+"  crtc=N\tAyarların uygulanacağı virgülle ayrılmış CRTC'lerin listesi\n"
 
 #: ../src/gamma-randr.c:317
 #, c-format
 msgid "Unable to read screen number: `%s'.\n"
-msgstr ""
+msgstr "Ekran numarası okunamıyor: `%s'.\n"
 
 #: ../src/gamma-randr.c:353 ../src/gamma-vidmode.c:145
 #, c-format
@@ -599,40 +642,44 @@ msgid ""
 "Parameter `%s` is now always on;  Use the `%s` command-line option to "
 "disable.\n"
 msgstr ""
+"`%s` parametresi artık her zaman açık;  Devre dışı bırakmak için `%s` komut "
+"satırı seçeneğini kullanın.\n"
 
 #: ../src/gamma-vidmode.c:50 ../src/gamma-vidmode.c:70
 #: ../src/gamma-vidmode.c:79 ../src/gamma-vidmode.c:106
 #: ../src/gamma-vidmode.c:169 ../src/gamma-vidmode.c:214
 #, c-format
 msgid "X request failed: %s\n"
-msgstr ""
+msgstr "X isteği başarısız oldu: %s\n"
 
 #: ../src/gamma-vidmode.c:129
 msgid "Adjust gamma ramps with the X VidMode extension.\n"
-msgstr ""
+msgstr "Gama ölçeklerini X VidMode eklentisi ile ayarla.\n"
 
 #. TRANSLATORS: VidMode help output
 #. left column must not be translated
 #: ../src/gamma-vidmode.c:134
 msgid "  screen=N\t\tX screen to apply adjustments to\n"
-msgstr ""
+msgstr "  screen=N\t\tAyarların uygulanacağı X ekranı\n"
 
 #: ../src/gamma-dummy.c:32
 msgid ""
 "WARNING: Using dummy gamma method! Display will not be affected by this "
 "gamma method.\n"
 msgstr ""
+"UYARI: Test gama yöntemi kullanılıyor! Ekran bu gama yönteminden "
+"etkilenmeyecek.\n"
 
 #: ../src/gamma-dummy.c:49
 msgid ""
 "Does not affect the display but prints the color temperature to the "
 "terminal.\n"
-msgstr ""
+msgstr "Ekranı etkilemez ancak renk sıcaklığını terminale yazdırır.\n"
 
 #: ../src/gamma-dummy.c:64
 #, c-format
 msgid "Temperature: %i\n"
-msgstr ""
+msgstr "Sıcaklık: %i\n"
 
 #: ../src/location-geoclue2.c:49
 #, c-format
@@ -641,60 +688,63 @@ msgid ""
 "Ensure location services are enabled and access by this program is "
 "permitted.\n"
 msgstr ""
+"Geçerli konuma erişim reddedildi!\n"
+"Konum hizmetlerinin etkinleştirildiğinden ve bu programın erişmesine izin  "
+"verildiğinden emin olun.\n"
 
 #: ../src/location-geoclue2.c:95
 #, c-format
 msgid "Unable to obtain location: %s.\n"
-msgstr ""
+msgstr "Konum alınamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:138
 #, c-format
 msgid "Unable to obtain GeoClue Manager: %s.\n"
-msgstr ""
+msgstr "GeoClue Yöneticisi alınamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:154
 #, c-format
 msgid "Unable to obtain GeoClue client path: %s.\n"
-msgstr ""
+msgstr "GeoClue istemci yolu alınamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:176
 #, c-format
 msgid "Unable to obtain GeoClue Client: %s.\n"
-msgstr ""
+msgstr "GeoClue İstemcisi alınamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:217
 #, c-format
 msgid "Unable to set distance threshold: %s.\n"
-msgstr ""
+msgstr "Mesafe eşiği ayarlanamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:241
 #, c-format
 msgid "Unable to start GeoClue client: %s.\n"
-msgstr ""
+msgstr "GeoClue istemcisi başlatılamıyor: %s.\n"
 
 #: ../src/location-geoclue2.c:380
 msgid "GeoClue2 provider is not installed!"
-msgstr ""
+msgstr "GeoClue2 sağlayıcısı kurulu değil!"
 
 #: ../src/location-geoclue2.c:387
 msgid "Failed to start GeoClue2 provider!"
-msgstr ""
+msgstr "GeoClue2 sağlayıcısı başlatılamadı!"
 
 #: ../src/location-geoclue2.c:422
 msgid "Use the location as discovered by a GeoClue2 provider.\n"
-msgstr ""
+msgstr "Bir GeoClue2 sağlayıcısı tarafından keşfedilen konumu kullan.\n"
 
 #: ../src/location-geoclue2.c:431 ../src/location-manual.c:96
 msgid "Unknown method parameter"
-msgstr ""
+msgstr "Bilinmeyen yöntem parametresi"
 
 #: ../src/location-manual.c:49
 msgid "Latitude and longitude must be set."
-msgstr ""
+msgstr "Enlem ve boylam ayarlanmalıdır."
 
 #: ../src/location-manual.c:65
 msgid "Specify location manually.\n"
-msgstr ""
+msgstr "Konumu elle belirtin.\n"
 
 #. TRANSLATORS: Manual location help output
 #. left column must not be translated
@@ -703,20 +753,24 @@ msgid ""
 "  lat=N\t\tLatitude\n"
 "  lon=N\t\tLongitude\n"
 msgstr ""
+"  lat=N\t\tEnlem\n"
+"  lon=N\t\tBoylam\n"
 
 #: ../src/location-manual.c:73
 msgid ""
 "Both values are expected to be floating point numbers,\n"
 "negative values representing west / south, respectively.\n"
 msgstr ""
+"Her iki değerin de ondalık sayılar olması beklenir,\n"
+"negatif değerler sırasıyla batıyı/güneyi temsil eder.\n"
 
 #: ../src/location-manual.c:87
 msgid "Malformed argument.\n"
-msgstr ""
+msgstr "Hatalı argüman.\n"
 
 #: ../src/gammastep_indicator/statusicon.py:66
 msgid "Suspend for"
-msgstr "Askıya alma"
+msgstr "Askıya al"
 
 #: ../src/gammastep_indicator/statusicon.py:68
 msgid "30 minutes"
@@ -731,14 +785,12 @@ msgid "2 hours"
 msgstr "2 saat"
 
 #: ../src/gammastep_indicator/statusicon.py:71
-#, fuzzy
 msgid "4 hours"
-msgstr "2 saat"
+msgstr "4 saat"
 
 #: ../src/gammastep_indicator/statusicon.py:72
-#, fuzzy
 msgid "8 hours"
-msgstr "2 saat"
+msgstr "8 saat"
 
 #: ../src/gammastep_indicator/statusicon.py:81
 msgid "Autostart"
@@ -755,7 +807,7 @@ msgstr "Çıkış"
 
 #: ../src/gammastep_indicator/statusicon.py:136
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: ../src/gammastep_indicator/statusicon.py:301
 msgid "<b>Status:</b> {}"
@@ -763,7 +815,7 @@ msgstr "<b>Durum:</b> {}"
 
 #: ../src/gammastep_indicator/statusicon.py:349
 msgid "For help output, please run:"
-msgstr ""
+msgstr "Yardım çıktısı için lütfen şunu çalıştırın:"
 
 #, fuzzy, c-format
 #~ msgid "Color temperature: %uK"
