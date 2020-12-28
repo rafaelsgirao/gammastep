@@ -346,8 +346,7 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
 	}
 
 	if (state->num_outputs == unsupported_outputs) {
-		vlog_err(_("Zero outputs support gamma adjustment."));
-		exit(EXIT_FAILURE);
+		vlog_warning(_("Zero outputs support gamma adjustment."));
 	}
 	if (unsupported_outputs > 0) {
 		vlog_warning("%d/%d %s.", unsupported_outputs, state->num_outputs,
