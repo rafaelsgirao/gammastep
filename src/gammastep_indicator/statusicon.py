@@ -11,6 +11,7 @@ appindicator module isn't present it will fall back to a GTK status icon.
 import sys
 import signal
 import gettext
+from xml.sax.saxutils import escape
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -286,7 +287,7 @@ class RedshiftStatusIcon(object):
             None, Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR,
             Gtk.ButtonsType.CLOSE, '')
         error_dialog.set_markup(
-            '<b>Failed to run</b>\n<i>' + error + '</i>')
+            '<b>Failed to run</b>\n<i>' + escape(error) + '</i>')
         error_dialog.run()
 
         # Quit when the model dialog is closed
