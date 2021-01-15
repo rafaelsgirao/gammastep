@@ -1,6 +1,12 @@
 News
 ====
 
+v2.0.7 (2021-01-14)
+-------------------
+- Escape error text in indicator dialog
+- Downgrade wlroots method error to warning
+- Update turkish translations
+
 v2.0.6 (2020-12-12)
 -------------------
 - Update AppData metadata for modern practices (again)
