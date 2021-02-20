@@ -161,6 +161,8 @@ gamma_control_gamma_size(void *data, struct zwlr_gamma_control_v1 *control, uint
 static void
 gamma_control_failed(void *data, struct zwlr_gamma_control_v1 *control)
 {
+        struct output *output = data;
+        output->gamma_size = 0;
 }
 
 
