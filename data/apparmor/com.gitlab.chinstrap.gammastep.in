@@ -3,7 +3,7 @@
 
 #include <tunables/global>
 
-profile com.gitlab.chinstap.gammastep @bindir@/gammastep {
+profile com.gitlab.chinstrap.gammastep @bindir@/gammastep {
   #include <abstractions/base>
   #include <abstractions/nameservice>
   #include <abstractions/dbus-strict>
