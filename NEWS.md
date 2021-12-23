@@ -1,6 +1,11 @@
 News
 ====
 
+v2.0.8 (2021-12-22)
+-------------------
+- Fix '-q' option (#34)
+- Fix typo in AppArmor profile name
+
 v2.0.7 (2021-01-14)
 -------------------
 - Escape error text in indicator dialog
